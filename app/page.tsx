@@ -1,56 +1,36 @@
 'use client';
 
 import Image from 'next/image';
-import { ArrowRight, Check, ChevronLeft, CircleCheck, Clock, Info, MapPin, Plus, RotateCcw, ShoppingBasket, Sparkles, Utensils } from 'lucide-react';
+import { ArrowRight, Check, ChevronRight, CircleHelp, Handbag, MessageCircleMore, PackageCheck, Search, Sparkles, Truck } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
-const menu = [
-  { id: 'braised-pork', name: '招牌滷肉飯', note: '慢滷肉燥、溏心蛋、當日小菜', price: 85 },
-  { id: 'chicken-rice', name: '椒麻雞腿飯', note: '酥香雞腿、時蔬、特製椒麻醬', price: 145 },
-  { id: 'tea', name: '桂花烏龍茶', note: '冷泡烏龍、微甜桂花香', price: 45 },
-  { id: 'daily-salmon', name: '炙燒味噌鮭魚飯', note: '每日限定 12 份，售完為止', price: 180, limited: true },
+const products = [
+  { id: 'tote', name: '帆布日常托特包', price: 980, stock: '現貨' },
+  { id: 'cup', name: '手感釉面馬克杯', price: 720, stock: '現貨' },
+  { id: 'mist', name: '午后木質織物噴霧', price: 580, stock: '剩 6 件' },
 ];
-
-type View = 'home' | 'menu' | 'cart' | 'info' | 'limited' | 'confirmed';
-type Topic = Exclude<View, 'home' | 'confirmed'>;
-
-const sopFlows: { id: Topic; label: string; action: string; result: string; steps: string[] }[] = [
-  { id: 'menu', label: '菜單', action: 'menu.open.v1', result: '回傳目前可售的 Flex 菜單', steps: ['顧客點擊「菜單」', '後端讀取有效菜單與售價', '回覆可售餐點卡片', '點選餐點後加入購物車'] },
-  { id: 'cart', label: '查看購物車', action: 'cart.view.v1', result: '重新計價後顯示訂單摘要', steps: ['顧客點擊「查看購物車」', '讀取該顧客的購物車', '重新核對品項、數量與價格', '顧客修改內容或確認送單'] },
-  { id: 'info', label: '營業資訊', action: 'store.info.v1', result: '回傳核准的營業與交通資訊', steps: ['顧客點擊「營業資訊」', '讀取店家公開設定', '回覆營業時間與地址', '引導開啟地圖或返回主選單'] },
-  { id: 'limited', label: '每日限定', action: 'special.today.v1', result: '依台北日期回傳當日限定', steps: ['顧客點擊「每日限定」', '以 Asia/Taipei 判斷日期', '查詢今日品項與可售狀態', '可售則加入；售完則安全提示'] },
-];
+type View = 'catalog' | 'order' | 'support';
 
 export default function Home() {
-  const [cart, setCart] = useState<Record<string, number>>({});
-  const [view, setView] = useState<View>('home');
-  const [activeFlow, setActiveFlow] = useState<Topic>('menu');
-  const cartItems = useMemo(() => menu.filter((item) => cart[item.id]).map((item) => ({ ...item, quantity: cart[item.id] })), [cart]);
-  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const [cart, setCart] = useState<string[]>([]);
+  const [view, setView] = useState<View>('catalog');
+  const [checkedOut, setCheckedOut] = useState(false);
+  const total = useMemo(() => cart.reduce((sum, id) => sum + (products.find((p) => p.id === id)?.price ?? 0), 0), [cart]);
+  const addProduct = (id: string) => { setCart((items) => [...items, id]); setCheckedOut(false); setView('catalog'); };
 
-  const openTopic = (topic: Topic) => { setView(topic); setActiveFlow(topic); };
-  const addItem = (id: string) => { setCart((current) => ({ ...current, [id]: (current[id] || 0) + 1 })); setView('cart'); setActiveFlow('cart'); };
-  const resetDemo = () => { setCart({}); setView('home'); setActiveFlow('menu'); };
-
-  const phoneContent = () => {
-    if (view === 'home') return <div className="message-stack"><div className="bot-bubble"><span className="micro-label">歡迎來到巷口食堂</span><p className="bubble-title">午安，今天想吃點什麼？</p><p>請從下方圖文選單開始，四個入口都可以直接點擊體驗。</p></div><div className="guide-bubble"><span>↓</span> 點選下方任一主題</div></div>;
-    if (view === 'menu') return <div className="message-stack"><div className="bot-bubble compact"><span className="micro-label">目前可售菜單</span><p>價格與供應狀態由店家資料即時提供。</p></div><div className="menu-card">{menu.filter((item) => !item.limited).map((item) => <div className="menu-row" key={item.id}><div><strong>{item.name}</strong><small>{item.note}</small><b>NT${item.price}</b></div><button aria-label={`加入${item.name}`} onClick={() => addItem(item.id)}><Plus size={16} /></button></div>)}</div></div>;
-    if (view === 'cart') return <div className="message-stack"><div className="bot-bubble"><span className="micro-label">您的購物車</span>{cartItems.length ? <><div className="cart-lines">{cartItems.map((item) => <div key={item.id}><span>{item.name} × {item.quantity}</span><strong>NT${item.price * item.quantity}</strong></div>)}</div><div className="cart-total"><span>重新計算小計</span><strong>NT${total}</strong></div></> : <p>購物車目前是空的，先從「菜單」或「每日限定」挑選餐點。</p>}</div>{cartItems.length ? <button className="confirm-order" onClick={() => setView('confirmed')}>確認送出模擬訂單 <ArrowRight size={15} /></button> : <button className="chat-link" onClick={() => openTopic('menu')}>前往菜單 <ArrowRight size={14} /></button>}</div>;
-    if (view === 'info') return <div className="message-stack"><div className="bot-bubble info-bubble"><span className="micro-label">巷口食堂｜營業資訊</span><div className="info-line"><Clock size={15} /><div><strong>週一至週六</strong><p>11:30–14:00、17:00–20:30</p></div></div><div className="info-line"><MapPin size={15} /><div><strong>台北市中山區巷口路 18 號</strong><p>捷運站步行約 5 分鐘</p></div></div><small className="demo-note">以上為展示資料，正式版會使用店家核准資訊。</small></div></div>;
-    if (view === 'limited') { const item = menu.find((entry) => entry.limited)!; return <div className="message-stack"><div className="limited-card"><div className="limited-art"><Image src="/restaurant-hero.png" alt="每日限定套餐展示" fill sizes="290px" className="object-cover" /></div><div><span className="micro-label">今日限定｜剩餘 7 份</span><p className="bubble-title">{item.name}</p><p>{item.note}</p><div className="limited-action"><strong>NT${item.price}</strong><button onClick={() => addItem(item.id)}>加入購物車 <Plus size={14} /></button></div></div></div></div>; }
-    return <div className="message-stack"><div className="bot-bubble success-bubble"><CircleCheck size={22} /><div><strong>模擬訂單已送出</strong><p>單號 #XIANG-2409</p></div></div><div className="bot-bubble"><p className="bubble-title">店家已收到點單摘要</p><p>共 {itemCount} 件，模擬小計 NT${total}。正式版會等待店家確認後再回覆顧客。</p></div><button className="chat-link" onClick={resetDemo}>重新體驗 <RotateCcw size={14} /></button></div>;
+  const renderReply = () => {
+    if (view === 'order') return <div className="bubble bot-bubble order-bubble"><div className="flex items-center justify-between"><p className="font-bold">訂單 #MORI-0826</p><span className="status-chip"><Truck size={12} /> 配送中</span></div><p className="mt-2 text-xs text-stone-600">包裹已交由物流夥伴，預計 9/1 前送達。</p><button className="inline-link" onClick={() => setView('catalog')}>繼續選購 <ChevronRight size={14} /></button></div>;
+    if (view === 'support') return <div className="bubble bot-bubble support-bubble"><span className="support-icon"><CircleHelp size={16} /></span><p className="font-bold">需要幫忙嗎？</p><p className="mt-1 text-xs leading-5 text-stone-600">退換貨、配送或商品問題，我們會交由專人協助。</p><button className="inline-link" onClick={() => setView('catalog')}>傳送客服需求 <ChevronRight size={14} /></button></div>;
+    if (checkedOut) return <div className="bubble bot-bubble checkout-bubble"><div className="flex items-center gap-2 text-[#2f9a62]"><Check size={16} strokeWidth={3} /><span className="font-bold">已建立安全結帳連結</span></div><p className="mt-2 text-xs leading-5 text-stone-600">結帳會在受保護的付款頁完成；金額與庫存會再次確認。</p><button className="checkout-link"><span>前往模擬結帳</span><ArrowRight size={14} /></button></div>;
+    return <><div className="bubble bot-bubble intro-bubble"><span className="eyebrow">MORI SELECT</span><p className="mt-1 font-bold">把喜歡的日常，帶回家。</p><p className="mt-1 text-xs leading-5 text-stone-600">從選品、加入購物車到訂單追蹤，都能在 LINE 裡完成。</p></div><div className="catalog-card"><div className="catalog-image-wrap"><Image src="/mori-hero.png" alt="MORI 精選日常商品：帆布包、手感杯與織物噴霧" fill sizes="(max-width: 640px) 80vw, 290px" className="object-cover" /></div><div className="p-3.5"><div className="flex items-center justify-between"><p className="text-[11px] font-bold tracking-[0.12em] text-[#2f9a62]">THIS WEEK’S EDIT</p><Sparkles size={14} className="text-[#d59a43]" /></div><p className="mt-1 text-sm font-bold">讓生活慢一點的三件選品</p><div className="mt-3 space-y-1.5">{products.map((p) => <button key={p.id} className="product-row" onClick={() => addProduct(p.id)}><span><strong>{p.name}</strong><small>{p.stock} · NT${p.price.toLocaleString()}</small></span><span className="add-dot">＋</span></button>)}</div></div></div>{cart.length > 0 && <div className="cart-summary"><div><span className="text-xs text-stone-500">購物車 {cart.length} 件</span><p className="font-bold">NT${total.toLocaleString()}</p></div><button onClick={() => setCheckedOut(true)}>確認結帳 <ArrowRight size={14} /></button></div>}</>;
   };
 
-  const activeSop = sopFlows.find((flow) => flow.id === activeFlow)!;
-
   return <main>
-    <nav className="site-nav"><a className="brand" href="#top"><span className="brand-seal">巷</span><span>巷口食堂 <em>LINE ORDERING DEMO</em></span></a><span className="demo-badge"><span /> INTERACTIVE DEMO</span><a className="nav-link" href="#sop">查看流程 <ArrowRight size={15} /></a></nav>
-    <section className="demo-stage" id="top"><div className="stage-copy"><p className="eyebrow"><Sparkles size={16} /> LINE 圖文選單體驗</p><h1>四個入口，<br />把點餐流程說清楚。</h1><p>請直接點擊手機下方的「菜單、查看購物車、營業資訊、每日限定」，看看每個主題如何回覆顧客。</p><div className="legend"><span><Check size={15} /> 可實際點擊</span><span><Check size={15} /> 全程模擬資料</span><span><Check size={15} /> 不會送出真實訂單</span></div><div className="food-preview"><Image src="/restaurant-hero.png" alt="巷口食堂套餐展示" fill priority sizes="(max-width: 820px) 92vw, 36vw" className="object-cover" /><span>今日好味道，從 LINE 開始。</span></div></div>
-      <div className="phone-shell"><div className="phone-status"><span>9:41</span><span className="phone-pill" /><span>●●●</span></div><div className="line-header"><button aria-label="返回"><ChevronLeft size={19} /></button><div className="chat-avatar">巷</div><div><strong>巷口食堂</strong><small>官方帳號</small></div><span className="header-more">•••</span></div><div className="chat-area"><p className="date-pill">今天</p><div className="message-line"><div className="mini-avatar">巷</div>{phoneContent()}</div></div><div className="chat-input"><span>輸入訊息</span><span>＋</span><span>➤</span></div><div className="rich-menu"><button className={view === 'menu' ? 'active' : ''} onClick={() => openTopic('menu')}><span className="rich-icon menu-icon"><Utensils size={22} /></span><span><strong>菜單</strong><small>查看全部餐點</small></span></button><button className={view === 'cart' ? 'active' : ''} onClick={() => openTopic('cart')}><span className="rich-icon cart-icon"><ShoppingBasket size={22} /></span><span><strong>查看購物車</strong><small>{itemCount ? `${itemCount} 件・NT$${total}` : '確認已選品項'}</small></span></button><button className={view === 'info' ? 'active' : ''} onClick={() => openTopic('info')}><span className="rich-icon info-icon"><Info size={22} /></span><span><strong>營業資訊</strong><small>時間・地址・交通</small></span></button><button className={view === 'limited' ? 'active' : ''} onClick={() => openTopic('limited')}><span className="rich-icon limited-icon"><Sparkles size={22} /></span><span><strong>每日限定</strong><small>今天才吃得到</small></span></button></div></div>
-    </section>
-    <section className="sop-section" id="sop"><div className="sop-heading"><p className="eyebrow">CLICK SOP</p><h2>四個主題的點擊流程</h2><p>點選主題可切換 SOP。正式實作時，每個入口都使用固定版本的 postback 動作，後端再決定要回覆的資料。</p></div><div className="sop-layout"><div className="sop-tabs">{sopFlows.map((flow, index) => <button key={flow.id} className={activeFlow === flow.id ? 'active' : ''} onClick={() => { setActiveFlow(flow.id); setView(flow.id); }}><span>0{index + 1}</span><strong>{flow.label}</strong><ArrowRight size={16} /></button>)}</div><div className="sop-detail"><div className="contract-row"><span>點擊動作</span><code>{activeSop.action}</code></div><div className="contract-row"><span>預期結果</span><strong>{activeSop.result}</strong></div><div className="flow-track">{activeSop.steps.map((step, index) => <div key={step}><b>{index + 1}</b><span>{step}</span>{index < activeSop.steps.length - 1 && <ArrowRight size={16} />}</div>)}</div><div className="safety-note"><strong>正式版守則</strong><p>postback 只表達顧客意圖；價格、庫存、營業資訊與每日限定內容都由伺服器重新讀取與驗證。重複點擊不會重複建立訂單。</p></div></div></div></section>
-    <section className="summary-strip"><div><strong>菜單</strong><span>瀏覽與加入</span></div><div><strong>購物車</strong><span>重算與確認</span></div><div><strong>營業資訊</strong><span>核准內容回覆</span></div><div><strong>每日限定</strong><span>依日期與庫存判斷</span></div></section>
-    <footer><span>巷口食堂 · LINE 圖文選單展示</span><span>餐點、價格、庫存、地址與訂單皆為模擬資料。</span></footer>
+    <nav className="site-nav"><a className="brand" href="#top"><span className="brand-mark">M</span><span>MORI <em>SELECT</em></span></a><span className="demo-badge"><span /> INTERACTIVE DEMO</span><a className="nav-cta" href="#flow">查看流程 <ArrowRight size={15} /></a></nav>
+    <section className="hero" id="top"><div className="hero-copy"><p className="kicker"><MessageCircleMore size={15} /> LINE OFFICIAL ACCOUNT</p><h1>客戶想買的那一刻，<br /><i>剛好都在 LINE 裡。</i></h1><p className="hero-description">這不是一般聊天機器人。這是一段從「看到喜歡」到「安心結帳」都能被好好接住的購物體驗。</p><div className="hero-actions"><Button onClick={() => document.getElementById('chat-demo')?.scrollIntoView({ behavior: 'smooth' })} className="primary-action">開始體驗 <ArrowRight size={16} /></Button><span>不連接真實帳號／付款</span></div><div className="trust-row"><span><Check size={14} /> 商品即時資訊</span><span><Check size={14} /> 安全結帳導流</span><span><Check size={14} /> 訂單追蹤支援</span></div></div><div className="hero-visual"><div className="paper-note">從一則訊息，<br />開啟一段好感購物。</div><div className="visual-frame"><Image src="/mori-hero.png" alt="日常選品展示" fill priority sizes="(max-width: 900px) 90vw, 40vw" className="object-cover" /></div><span className="floating-tag">CURATED<br />FOR EVERYDAY</span></div></section>
+    <section className="demo-section" id="chat-demo"><div className="section-intro"><p className="kicker"><Handbag size={15} /> TRY THE CONVERSATION</p><h2>像客戶一樣，<br />親自走一遍。</h2><p>點選下方按鈕或商品卡，看看購物車與結帳引導如何自然接續。</p></div><div className="phone-shell"><div className="phone-top"><span className="speaker" /><span>9:41</span><span className="camera" /></div><div className="line-header"><button aria-label="返回"><ChevronRight className="rotate-180" size={18} /></button><div className="avatar">M</div><div><strong>MORI SELECT</strong><small>官方帳號</small></div><button aria-label="搜尋"><Search size={17} /></button></div><div className="chat-area"><p className="date-pill">今天</p><div className="message-line"><div className="mini-avatar">M</div><div>{renderReply()}</div></div></div><div className="quick-replies"><button onClick={() => { setView('catalog'); setCheckedOut(false); }}>看本週選品</button><button onClick={() => setView('order')}>追蹤我的訂單</button><button onClick={() => setView('support')}>需要協助</button></div><div className="chat-input"><span>輸入訊息</span><span className="input-plus">＋</span><span className="input-send">➤</span></div></div></section>
+    <section className="flow-section" id="flow"><div className="flow-heading"><p className="kicker"><PackageCheck size={15} /> BUILT FOR TRUST</p><h2>看見商品，也看見<br />值得信任的購物流程。</h2></div><div className="flow-grid"><article><span>01</span><h3>商品資訊有來源</h3><p>價格、款式與可售狀態，應來自已核准的商品資料，而不是聊天內容的猜測。</p></article><article><span>02</span><h3>結帳前再次確認</h3><p>購物車會重新核對數量、價格與庫存，再把客戶帶往安全付款頁面。</p></article><article><span>03</span><h3>售後不斷線</h3><p>訂單追蹤、例外狀況與真人支援，都保留清楚且安心的下一步。</p></article></div></section>
+    <footer><span>MORI SELECT · LINE SHOPPING BOT DEMO</span><span>所有商品、價格與訂單皆為展示用模擬資料。</span></footer>
   </main>;
 }
