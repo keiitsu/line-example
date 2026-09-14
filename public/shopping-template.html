@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LINE 導購｜互動模板工作室</title><style>:root{font-family:Inter,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:#263b34;background:#f5f3ec;font-synthesis:none;--green:#176858;--line:#dedfd4}*{box-sizing:border-box}body{margin:0}button,input,a{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #b29144;outline-offset:3px}button:disabled{opacity:.4;cursor:not-allowed}a{color:inherit;text-decoration:none}.top{height:84px;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;border-bottom:1px solid var(--line)}.wordmark{font-size:15px;letter-spacing:2px;font-weight:750}.wordmark span{color:#a6ad92;margin:0 8px}.topnote,.eyebrow{font-size:11px;letter-spacing:1.8px;color:#7c8974}.admin-link{font-size:12px;border-bottom:1px solid #929e86;padding-bottom:5px}.workspace{max-width:1340px;margin:38px auto;display:grid;grid-template-columns:1fr 414px 1fr;gap:46px;padding:0 36px}.intro{padding-top:34px}h1{font-family:Georgia,"Noto Serif TC","Microsoft JhengHei",serif;font-size:49px;line-height:1.35;font-weight:500;letter-spacing:1px;margin:24px 0}h2{font-size:21px;font-weight:550;line-height:1.6}.lead{font-size:15px;line-height:1.9;color:#718072}.mode{display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-size:12px;margin:28px 0}.mode i,.phonebar i{display:inline-block;background:#70a66c;border-radius:50%;width:6px;height:6px}.mode span{display:block;width:100%;padding-left:13px;font-size:11px;color:#89917e}.steps{margin:35px 0}.steps p{display:flex;gap:18px;margin:24px 0}.steps b{font-family:Georgia,serif;font-weight:400;color:#a0a990;font-size:23px}.steps span{font-size:14px}.steps small{display:block;font-size:11px;color:#879180;margin-top:7px}.note{border-top:1px solid var(--line);padding-top:17px;max-width:275px;color:#8a9081;font-size:11px;line-height:1.8}.phone{border:1px solid #d3d9ce;border-radius:22px;background:#fff;box-shadow:0 15px 50px #3248340d;overflow:hidden;align-self:start}.phonebar{height:73px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#fff;border-bottom:1px solid #e7ebdf}.phonebar>span{font-size:26px}.phonebar div{text-align:center}.phonebar strong{font-size:14px;letter-spacing:1px}.phonebar small{display:block;font-size:10px;color:#83917e;margin-top:6px}.phonebar i{margin-right:5px}.phonebar button{background:none;border:0;font-size:22px;color:#657562}.chat{height:375px;overflow:auto;background:#edf1e9;padding:16px 14px;scroll-behavior:smooth}.day{text-align:center;font-size:10px;color:#8b9785;margin-bottom:16px}.message{margin-bottom:14px;display:flex;gap:8px;align-items:flex-start}.avatar{background:var(--green);color:white;font:14px Georgia;border-radius:50%;width:27px;height:27px;display:grid;place-items:center;flex-shrink:0}.message.user{justify-content:flex-end}.bubble{background:white;border-radius:0 14px 14px 14px;padding:13px 15px;font-size:12px;line-height:1.9;white-space:pre-wrap;max-width:88%;overflow-wrap:anywhere}.user .bubble{background:#d2e3b4;border-radius:14px 0 14px 14px}.system{font-size:11px;text-align:center;color:#738569;padding:8px;line-height:1.7}.flexlist{display:flex;overflow-x:auto;gap:9px;max-width:calc(100% - 35px);padding-bottom:3px}.flex-card{min-width:248px;max-width:248px;background:white;border-radius:13px;overflow:hidden}.flex-art{height:105px;background:#e4dcca;display:grid;place-items:center;font-family:Georgia,serif;font-size:36px;color:#9d886b}.flex-card:nth-child(2) .flex-art{background:#dce1d0;color:#788065}.flex-card:nth-child(3) .flex-art{background:#e5dfd7;color:#99867c}.flex-body{padding:15px;font-size:12px;line-height:1.75}.flex-body h4{font-size:15px;margin:0 0 8px;font-weight:650}.flex-body p{margin:0 0 12px;color:#849080;white-space:pre-wrap}.flex-body button,.primary{border:0;background:var(--green);color:white;border-radius:6px;padding:10px 14px;width:100%;font-size:12px}.quick{display:flex;gap:6px;padding:9px 10px;overflow:auto;border-bottom:1px solid #eee}.quick:empty{display:none}.quick button{white-space:nowrap;font-size:10px;border:1px solid #d9e0d1;border-radius:20px;padding:6px 10px;color:#60735a;background:#fff}.composer{display:flex;padding:10px 12px;gap:8px;background:#fff}.composer input{min-width:0;flex:1;border:1px solid #e1e5dc;background:#f8f9f5;border-radius:20px;padding:9px 12px;font-size:11px}.composer button{border:0;background:#176858;color:white;border-radius:50%;width:33px;font-size:18px}.menu-title{text-align:center;border-top:1px solid #e5e8dd;font-size:10px;padding:8px;color:#7c8a72}.menu-title span{float:right;margin-right:16px}.richmenu{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#dfe4d5}.richmenu button{background:#f9faf5;border:0;color:#54634c;display:flex;align-items:center;justify-content:center;padding:17px 10px;gap:11px;font-size:12px}.richmenu .featured{grid-column:span 2;background:#195f50;color:white;justify-content:flex-start;padding:18px 22px;gap:17px;text-align:left}.featured small{font-size:8px;letter-spacing:2px;display:block;color:#b7ceae;margin-top:5px}.featured b{margin-left:auto;font-weight:400;font-size:20px}.menu-icon{font-size:26px;color:#cfdaad}.controls{padding-top:35px}.muted{font-size:12px;color:#8a9382;line-height:1.8}.scenario{margin-top:25px}.scenario button{width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:17px 0;text-align:left;font-size:13px;display:flex;justify-content:space-between;color:#445b4b;gap:8px}.scenario button span{font-size:10px;color:#8c977e}.status-card{padding:22px;margin-top:30px;background:#edf0e6;border:1px solid #e1e6d7;border-radius:10px}.status-card h3{font-size:16px;margin:15px 0 8px}.status-card p{font-size:11px;line-height:1.7;overflow-wrap:anywhere;color:#7b8b70}.operator{display:flex;gap:7px;margin-top:15px}.operator button{padding:8px;border:1px solid #b9c7aa;border-radius:5px;background:transparent;font-size:10px;color:#57694a}.tiny{font-size:10px!important}.boundary{margin-top:28px;border-top:1px solid var(--line);padding-top:20px}.boundary span{font-size:10px;color:#94a086}.boundary p{font-size:12px;line-height:1.8;margin:8px 0 17px;color:#617355}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}dialog{border:1px solid var(--line);border-radius:16px;max-width:420px;width:90%;padding:30px;color:#304c40;background:#fafaf4}dialog::backdrop{background:#14342988}dialog p{font-size:13px;line-height:1.8}dialog code{font-size:11px;display:block;overflow-wrap:anywhere;padding:15px;background:#eaf0e5;margin-bottom:20px}.close{float:right;background:none;border:0;font-size:24px}.admin-shell{max-width:1000px;margin:40px auto;padding:0 24px}.admin-shell input{padding:10px;border:1px solid var(--line);border-radius:6px;background:white}.admin-shell button{padding:10px 15px;border:0;border-radius:6px;background:var(--green);color:white}.admin-form{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.case-row{background:white;border:1px solid var(--line);padding:18px;margin:12px 0;border-radius:8px;font-size:13px}.case-row p{overflow-wrap:anywhere}.case-row button{margin-right:8px}.error{color:#965139}.admin-shell pre{white-space:pre-wrap;background:#eef0e9;padding:20px;font-size:12px}.notice{font-size:13px;line-height:1.8;color:#76816c}
+@media(min-width:1500px){.workspace{margin-top:60px}}@media(max-width:1100px){.workspace{grid-template-columns:1fr 400px;gap:28px;max-width:860px}.controls{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;gap:10px 30px}.controls>.eyebrow,.controls>h2,.controls>.muted{grid-column:span 2;margin:0}.boundary{display:none}.status-card{margin-top:25px}}@media(max-width:670px){.top{padding:0 20px;height:64px}.topnote{display:none}.wordmark{font-size:11px}.workspace{display:flex;flex-direction:column;padding:0 16px;gap:22px;margin:20px auto;max-width:450px}.intro{padding-top:0}.intro h1{font-size:28px;margin:10px 0;display:inline}.intro h1 br{display:none}.intro .lead,.steps,.intro .note{display:none}.intro .eyebrow{display:block;margin-bottom:10px}.mode{margin:12px 0}.mode span{width:auto;padding:0}.phone{width:100%;border-radius:18px}.chat{height:350px}.controls{display:block;padding-top:15px}.controls h2{margin-top:10px}.status-card{margin:20px 0}.scenario{margin:10px 0}.admin-link{font-size:10px}}@media(prefers-reduced-motion:reduce){.chat{scroll-behavior:auto}}
+/* Interactive template studio */
+body{--green:#176858;--soft:#edf1e9;--accent:#d2e3b4;--paper:#f5f3ec;background:var(--paper)}body[data-theme=rose]{--green:#93536c;--soft:#f3e9ed;--accent:#ecd1db;--paper:#faf2f2}body[data-theme=ocean]{--green:#315d88;--soft:#e7eef5;--accent:#cbdff0;--paper:#f1f4f8}.chat,.status-card{background:var(--soft)}.richmenu .featured,.composer button{background:var(--green)}.user .bubble{background:var(--accent)}.workspace{max-width:1410px;grid-template-columns:minmax(250px,1fr) 414px minmax(240px,1fr);gap:40px;margin-top:28px}.intro{padding-top:5px}.intro h1{font-size:40px;margin:14px 0}.intro .lead{font-size:13px}.mode{margin:16px 0}.editor{border-top:1px solid var(--line);padding-top:18px;margin:20px 0}.editor-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:18px}.pill{font-size:9px;padding:4px 7px;border:1px solid var(--line);border-radius:20px;white-space:nowrap}.editor>label,.settings-row label{display:block;font-size:11px;margin:12px 0 7px;color:#58665b}.editor input:not([type=radio]):not([type=file]),.editor textarea,.editor select{width:100%;font:12px inherit;font-family:inherit;font-size:12px;padding:10px;border:1px solid var(--line);border-radius:6px;background:#ffffffc9;color:#263b34}.editor textarea{resize:vertical;min-height:60px}.themes{border:0;margin:16px 0;padding:0;display:flex;gap:16px}.themes legend{font-size:11px;margin-bottom:10px}.themes label{font-size:11px;display:flex;gap:5px;align-items:center;cursor:pointer}.themes input{accent-color:var(--green);margin:0}.swatch{width:13px;height:13px;border-radius:50%;display:inline-block}.forest{background:#176858}.rose{background:#93536c}.ocean{background:#315d88}.settings-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}.file-actions{display:flex;gap:10px;margin-top:16px}.file-actions button,.file-actions label{font:11px inherit;font-size:11px;text-align:center;flex:1;border:1px solid var(--line);background:transparent;padding:9px;cursor:pointer;border-radius:5px}.file-actions label:focus-within{outline:3px solid #b29144}.editor .tiny{line-height:1.6;color:#74816c}button.admin-link{border:0;border-bottom:1px solid #929e86;background:none;cursor:pointer}.journey{background:white;border:1px solid var(--line);padding:18px;border-radius:12px;margin-bottom:26px}.journey p{font-size:13px;margin:12px 0}.journey-dots{display:flex;gap:8px;flex-wrap:wrap}.journey-dots span{font-size:10px;color:#899285}.journey-dots .done{color:var(--green);font-weight:bold}.controls{padding-top:0}.scenario{margin-top:15px}.scenario button{padding:14px 0}.status-card{margin-top:24px}.boundary{margin-top:18px}.flex-art{height:128px;position:relative;overflow:hidden;background:linear-gradient(140deg,#f2eadf,#ded3bc)}.art-label{position:absolute;bottom:10px;left:13px;font:7px sans-serif;letter-spacing:2px;color:#756d60}.product-object{display:block;position:relative;filter:drop-shadow(8px 10px 6px #54483e22)}.product-object.cup{height:57px;width:56px;background:linear-gradient(100deg,#eee4d3,#fff9ec 40%,#d3c6b2);border-radius:5px 5px 21px 21px;border-top:5px solid #b6a58c}.product-object.cup:after{content:'';position:absolute;right:-20px;top:7px;width:20px;height:26px;border:7px solid #e5dac7;border-left:0;border-radius:0 16px 16px 0}.product-object.bag{width:66px;height:60px;background:#f1e7cd;border-radius:4px 4px 10px 10px;border:1px solid #c2b69a;transform:rotate(-7deg)}.product-object.bag:before{content:'';position:absolute;width:30px;height:28px;top:-24px;left:16px;border:5px solid #c5b99f;border-bottom:0;border-radius:20px 20px 0 0}.product-object.shirt{width:90px;height:76px;background:#f8f6ef;clip-path:polygon(25% 0,38% 0,50% 14%,62% 0,75% 0,100% 26%,84% 43%,75% 33%,75% 100%,25% 100%,25% 33%,16% 43%,0 26%)}.product-object.abstract{width:55px;height:55px;border:1px solid #9f998a;transform:rotate(45deg);background:#fff5}.presenting .intro,.presenting .controls{display:none}.presenting .workspace{display:block;max-width:486px}.presenting .phone{width:100%}.phonebar strong{display:block;max-width:270px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wordmark{max-width:45%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}textarea:focus-visible,select:focus-visible{outline:3px solid #b29144;outline-offset:2px}
+@media(max-width:1100px){.workspace{grid-template-columns:minmax(250px,1fr) 400px;max-width:870px;gap:28px}.controls{display:block;columns:2;column-gap:30px}.controls>*{break-inside:avoid}.journey{margin-bottom:18px}}@media(max-width:670px){.workspace{display:flex;max-width:450px;padding:0 16px;gap:22px}.intro{width:100%}.intro h1{font-size:28px}.editor{margin:16px 0 0}.intro .note{display:block;margin-top:16px;max-width:none}.controls{columns:auto}.phonebar strong{max-width:230px}.presenting .workspace{max-width:450px}.topnote{display:none}}
+</style></head>
+<body>
+<header class="top"><a class="wordmark" href="#">M<span>／</span> MORI SELECT</a><span class="topnote">TEMPLATE STUDIO · A 型導購</span><button id="present" class="admin-link" aria-pressed="false">專注預覽 ↗</button></header>
+<main class="workspace">
+  <section class="intro">
+    <span class="eyebrow">A · 電商／零售導購</span><h1>從喜歡，<br>到下一步。</h1><p class="lead">讓商品更容易被找到，<br>讓每個問題都有清楚的入口。</p>
+    <div class="mode"><i></i><strong>互動展示</strong><span>離線可用 · 不連接正式 LINE</span></div>
+    <form id="settings" class="editor">
+      <div class="editor-heading"><span class="eyebrow">01 / 打造你的品牌</span><span class="pill">展示設定</span></div>
+      <label for="brand">品牌名稱</label><input id="brand" maxlength="32" required value="MORI SELECT">
+      <label for="welcome">歡迎標語</label><textarea id="welcome" maxlength="160" rows="2" required>把日常，過成喜歡的樣子。</textarea>
+      <fieldset class="themes"><legend>風格配色</legend><label><input type="radio" name="theme" value="forest" checked><span class="swatch forest"></span>森林</label><label><input type="radio" name="theme" value="rose"><span class="swatch rose"></span>玫瑰</label><label><input type="radio" name="theme" value="ocean"><span class="swatch ocean"></span>海洋</label></fieldset>
+      <div class="settings-row"><div><label for="catalog">商品情境</label><select id="catalog"><option value="normal">正常目錄</option><option value="empty">暫無可售商品</option></select></div><div><label for="offers">優惠情境</label><select id="offers"><option value="none">無有效優惠</option><option value="active">展示活動</option></select></div></div>
+      <button class="primary" type="submit">套用並重新體驗 →</button>
+      <p class="tiny muted">套用會重新開始對話；商品均為虛構展示資料。</p>
+      <div class="file-actions"><button id="export" type="button">匯出設定 ↓</button><label for="import">匯入設定 ↑<input id="import" type="file" accept=".json,application/json" class="sr"></label></div>
+      <p id="settings-feedback" role="status" class="tiny">可匯出 JSON，供下次預覽使用。</p>
+    </form>
+    <div class="note">所有操作皆在本頁模擬。品牌設定不會修改正式 LINE 或商品資料。</div>
+  </section>
+  <section class="phone" aria-label="LINE 對話模擬器">
+    <div class="phonebar"><span>‹</span><div><strong id="phone-brand">MORI SELECT</strong><small><i></i>官方帳號導購體驗</small></div><button id="reset" title="重新開始" aria-label="重新開始對話">↻</button></div>
+    <div class="chat" id="chat" aria-live="polite"><div class="day">今天 · 展示對話</div></div>
+    <div class="quick" id="quick"></div>
+    <form id="composer" class="composer"><label class="sr" for="input">輸入訊息</label><input id="input" maxlength="500" autocomplete="off" placeholder="試試「配送」或「搜尋 陶杯」"><button aria-label="傳送訊息">↑</button></form>
+    <div class="menu-title">購物選單 <span>⌄</span></div>
+    <div class="richmenu">
+      <button data-message="熱銷商品" class="featured"><span class="menu-icon">✦</span><span>熱銷商品<small>FIND YOUR EVERYDAY</small></span><b>↗</b></button>
+      <button data-message="商品分類"><span>▦</span>商品分類</button><button data-message="本期優惠"><span>◇</span>本期優惠</button>
+      <button data-message="我的訂單"><span>▤</span>我的訂單</button><button data-message="客服與購物說明"><span>☏</span>客服與購物說明</button>
+    </div>
+  </section>
+  <aside class="controls"><div class="journey"><span class="eyebrow">02 / 探索顧客旅程</span><p id="progress-label">已體驗 0 / 5 個入口</p><div class="journey-dots" id="journey-dots" aria-label="入口體驗進度"></div></div><span class="eyebrow">體驗幾個常見情境</span><h2>每一步，都有回應。</h2><p class="muted">點選情境，觀察機器人的實際流程。</p>
+    <div class="scenario"><button data-message="配送">配送與出貨<span>核准 FAQ ↗</span></button><button data-message="退換貨">售後問題<span>核准 FAQ ↗</span></button><button data-message="搜尋 陶杯">搜尋「陶杯」<span>商品篩選 ↗</span></button><button data-message="搜尋 不存在的商品">找不到商品<span>空結果 ↗</span></button><button data-message="真人客服">需要真人協助<span>建立案件 ↗</span></button></div>
+    <div class="status-card"><span class="eyebrow">目前服務狀態</span><h3 id="state-label">自動導購中</h3><p id="case-label">尚未建立客服案件</p><div class="operator"><button id="accept">模擬客服接單</button><button id="resolve">模擬客服結案</button></div><p class="tiny">以上按鈕只影響本頁展示。真人接管後機器人停止問答，結案後恢復。</p></div>
+    <div class="boundary"><span>已包含</span><p>商品導流 · 分類 · FAQ<br>會員訂單入口 · 客服接管</p><span>由購物網站處理</span><p>會員登入 · 付款 · 配送紀錄</p></div>
+  </aside>
+</main>
+<dialog id="link-dialog" aria-labelledby="link-title"><button id="close-dialog" class="close" aria-label="關閉">×</button><span class="eyebrow">示範外部入口</span><h2 id="link-title">前往商品網站</h2><p>正式版會開啟商家核准的 HTTPS 頁面。此處只展示導流目標，不會下單或付款。</p><code id="link-value"></code><button id="back-chat" class="primary">返回對話</button></dialog>
+<script>(()=>{
+'use strict';
+// Isolated, fictional products. NEVER imported by the deployed LINE bot.
+const DEMO_STORE = {
+  approved:true,brand:'MORI SELECT・展示品牌',version:'demo-1',allowedHosts:['example.com'],
+  shopUrl:'https://example.com/shop',ordersUrl:'https://example.com/account/orders',supportUrl:'https://example.com/support',
+  welcome:'歡迎來到 MORI SELECT 展示店。\n把日常，過成喜歡的樣子。\n\n從熱銷商品開始探索，或選一個喜歡的分類。此處商品與連結均為示範，不會產生訂單。',
+  fallback:'這個問題目前沒有已設定的回答。可以點「客服與購物說明」，或選擇真人客服協助。',
+  supportNotice:'展示客服案件已建立，尚待人員接單。這是本機模擬，不會通知真實客服。',
+  categories:[{id:'daily',name:'日常器物'},{id:'wear',name:'輕盈穿搭'},{id:'travel',name:'出門提案'}],
+  products:[
+    {id:'cup',categoryId:'daily',name:'晨光陶杯',description:'展示商品｜讓每天的第一杯，成為留給自己的時間。價格與供應以商品頁為準。',url:'https://example.com/products/cup',featured:true,enabled:true},
+    {id:'bag',categoryId:'travel',name:'日常帆布袋',description:'展示商品｜帶著剛剛好的生活，輕裝出門。價格與供應以商品頁為準。',url:'https://example.com/products/bag',featured:true,enabled:true},
+    {id:'shirt',categoryId:'wear',name:'柔光棉襯衫',description:'展示商品｜為平凡日子選一件簡單的衣服。價格與供應以商品頁為準。',url:'https://example.com/products/shirt',featured:true,enabled:true},
+    {id:'soldout',categoryId:'daily',name:'未上架示範品',description:'不可導購',url:'https://example.com/products/hidden',featured:true,enabled:false}
+  ],
+  promotions:[],
+  faq:[
+    {id:'delivery',enabled:true,match:'keyword',triggers:['配送','出貨','運費'],priority:10,answer:'此為配送 FAQ 示範。正式上線前，請填入商家核准的配送方式、運費及出貨政策。這裡不承諾送達日期。'},
+    {id:'returns',enabled:true,match:'keyword',triggers:['退換貨','退貨','退款'],priority:20,answer:'此為售後 FAQ 示範。正式版會顯示商家核准的退換貨說明；個別訂單爭議請選「真人客服」，機器人不會直接批准退款。'},
+    {id:'size',enabled:true,match:'keyword',triggers:['尺寸','大小'],priority:30,answer:'請以各商品頁的尺寸表為準。若不確定，可以交由真人客服協助；機器人不保證尺寸一定適合。'}
+  ]
+};
+
+// Shared deterministic router: used by the Worker AND the isolated preview.
+const ENTRY_LABELS = ['熱銷商品', '商品分類', '本期優惠', '我的訂單', '客服與購物說明'];
+const actionMap = { home: 'home', featured: 'featured', categories: 'categories', offers: 'offers', orders: 'orders', help: 'help', support: 'support', resume: 'resume' };
+const commands = new Map([
+  ['主選單','home'], ['使用說明','home'], ['熱銷商品','featured'], ['商品分類','categories'],
+  ['本期優惠','offers'], ['我的訂單','orders'], ['訂單查詢','orders'], ['客服與購物說明','help'],
+  ['真人客服','support'], ['恢復機器人','resume']
+]);
+function normalize(value) { return String(value ?? '').normalize('NFKC').trim().replace(/\s+/g, ' ').toLowerCase(); }
+function safeUrl(value, store) {
+  try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password && store.allowedHosts.includes(u.hostname) ? u.href : null; }
+  catch { return null; }
+}
+function activeProducts(store, now = Date.now()) {
+  return store.products.filter(p => p.enabled && safeUrl(p.url, store) && (!p.validUntil || Date.parse(p.validUntil) > now));
+}
+function activeOffers(store, now = Date.now()) {
+  return store.promotions.filter(p => p.enabled && safeUrl(p.url, store) && Date.parse(p.startsAt) <= now && Date.parse(p.endsAt) > now);
+}
+function validateStore(s) {
+  const errors = [];
+  if (!s.approved) errors.push('請核准品牌、文案與商品設定（approved）。');
+  if (!s.brand?.trim() || s.brand.includes('待設定')) errors.push('請設定正式品牌名稱。');
+  if (!s.version) errors.push('請設定內容版本。');
+  for (const key of ['shopUrl','ordersUrl','supportUrl']) if (!safeUrl(s[key],s)) errors.push(`${key} 必須是白名單內的 HTTPS 網址。`);
+  if (!s.products.length) errors.push('請至少設定一個商品。');
+  for (const [kind, list] of [['商品',s.products],['分類',s.categories],['優惠',s.promotions],['FAQ',s.faq]]) {
+    const seen = new Set();
+    for (const x of list) { if (!/^[a-zA-Z0-9_-]{1,48}$/.test(x.id) || seen.has(x.id)) errors.push(`${kind} ID 不合法或重複。`); seen.add(x.id); }
+  }
+  for (const p of s.products) {
+    if (!p.name || p.name.length > 100 || !safeUrl(p.url,s) || !s.categories.some(c => c.id === p.categoryId)) errors.push(`商品 ${p.id} 缺少有效名稱、網址或分類。`);
+    if (p.imageUrl && !safeUrl(p.imageUrl,s)) errors.push(`商品 ${p.id} 圖片網址不在白名單。`);
+    if (p.validUntil && !Number.isFinite(Date.parse(p.validUntil))) errors.push(`商品 ${p.id} 效期不正確。`);
+  }
+  for (const p of s.promotions) if (!p.title || !p.description || !safeUrl(p.url,s) || !(Date.parse(p.endsAt) > Date.parse(p.startsAt))) errors.push(`優惠 ${p.id} 規則或效期不完整。`);
+  for (const f of s.faq) if (!['exact','keyword'].includes(f.match) || !f.triggers?.length || f.triggers.some(t => !normalize(t)) || !Number.isFinite(f.priority) || !f.answer?.trim() || f.answer.length > 4000) errors.push(`FAQ ${f.id} 規則不完整。`);
+  for (const key of ['welcome','fallback','supportNotice']) if (!s[key]?.trim() || s[key].length > 4000) errors.push(`${key} 必須是已核准且長度合適的文案。`);
+  return errors;
+}
+function parseIntent(event, store) {
+  if (event.type === 'follow') return { kind: 'welcome' };
+  if (event.type === 'unfollow') return { kind: 'unfollow' };
+  if (event.type === 'postback') {
+    const data = new URLSearchParams(event.postback?.data ?? '');
+    if (data.get('v') !== '1' || [...data.keys()].some(k => !['v','action','ref'].includes(k)) || [...data.keys()].some(k => data.getAll(k).length !== 1)) return { kind: 'invalid' };
+    const action = data.get('action');
+    if (actionMap[action] && !data.has('ref')) return { kind: actionMap[action] };
+    if (action === 'category' && store.categories.some(c => c.id === data.get('ref'))) return { kind: 'category', ref: data.get('ref') };
+    return { kind: 'invalid' };
+  }
+  const text = normalize(event.message?.text);
+  if (commands.has(text)) return { kind: commands.get(text) };
+  const faq = [...store.faq].filter(f => f.enabled).sort((a,b) => (a.match === 'exact' ? 0:1) - (b.match === 'exact' ? 0:1) || a.priority - b.priority || a.id.localeCompare(b.id));
+  const matched = faq.find(f => f.triggers.some(t => f.match === 'exact' ? text === normalize(t) : text.includes(normalize(t))));
+  if (matched) return { kind: 'faq', ref: matched.id };
+  if (text.startsWith('搜尋 ')) {
+    const q = text.slice(3).trim();
+    return { kind: 'search', refs: q ? store.products.filter(p => normalize(`${p.name} ${p.description ?? ''}`).includes(q)).slice(0,10).map(p => p.id) : [] };
+  }
+  return { kind: 'fallback' }; // Never persist the raw customer's text.
+}
+function initialState() { return { mode: 'bot', caseId: null, caseDay: null, caseVersion: 0, lastAt: 0 }; }
+function textMessage(text, labels = ENTRY_LABELS) {
+  return { type: 'text', text: text.slice(0,5000), quickReply: { items: labels.map(label => ({type:'action',action:{type:'message',label,text:label}})) } };
+}
+const txt = (text, labels) => [textMessage(text,labels)];
+function button(label, action) { return {type:'button',style:'primary',color:'#176858',height:'sm',action:{label,...action}}; }
+function card(title, description, action, imageUrl) {
+  return {type:'bubble',size:'mega',...(imageUrl ? {hero:{type:'image',url:imageUrl,size:'full',aspectRatio:'4:3',aspectMode:'cover'}}:{}),body:{type:'box',layout:'vertical',spacing:'md',contents:[{type:'text',text:title,weight:'bold',size:'lg',wrap:true},{type:'text',text:description || '查看商品頁了解詳細資訊。',size:'sm',color:'#66736C',wrap:true}]},footer:{type:'box',layout:'vertical',contents:[action]}};
+}
+function cards(altText,bubbles) { return [{type:'flex',altText,contents:bubbles.length === 1 ? bubbles[0] : {type:'carousel',contents:bubbles.slice(0,10)}}]; }
+function resolveLink(id, store, now = Date.now()) {
+  if (id === 'shop') return safeUrl(store.shopUrl,store);
+  if (id === 'support') return safeUrl(store.supportUrl,store);
+  if (id === 'orders') return safeUrl(store.ordersUrl,store);
+  const [kind, ref] = id.split(':');
+  const p = kind === 'product' ? activeProducts(store,now).find(x => x.id === ref) : kind === 'offer' ? activeOffers(store,now).find(x => x.id === ref) : null;
+  return p ? safeUrl(p.url,store) : null;
+}
+function route(intent, current, store, options = {}) {
+  const now = options.now ?? Date.now(), state = {...current}, links = options.link ?? (id => resolveLink(id,store,now));
+  let messages = [], caseChanged = false;
+  if (intent.kind === 'unfollow') { state.mode='bot'; state.caseId=null; state.caseVersion++; return {state,messages,caseChanged:!!current.caseId}; }
+  if (intent.kind === 'resume') {
+    state.mode='bot'; state.caseId=null; state.caseVersion++;
+    return {state,messages:txt('已恢復自動導購。需要真人協助時可再次輸入「真人客服」。'),caseChanged:!!current.caseId};
+  }
+  if (state.mode !== 'bot') {
+    if (intent.kind === 'support') messages=txt(`案件 ${state.caseId} ${state.mode === 'agent' ? '已由客服接手。' : '仍待客服接單。'}\n如要離開真人協助，請輸入「恢復機器人」。`,['恢復機器人']);
+    return {state,messages,caseChanged};
+  }
+  if (intent.kind === 'support') {
+    state.mode='waiting'; state.caseId=options.newCaseId ?? 'DEMO-CASE'; state.caseDay=new Date(now).toISOString().slice(0,10); state.caseVersion++;
+    return {state,messages:txt(`${store.supportNotice}\n案件編號：${state.caseId}\n請在原聊天室留下需要協助的事項。機器人將暫停自動問答。`,['恢復機器人']),caseChanged:true};
+  }
+  if (['welcome','home'].includes(intent.kind)) messages=txt(store.welcome);
+  else if (intent.kind === 'orders') messages=cards('登入商店查詢本人訂單',[card('我的訂單','請先在商店網站登入會員，再查看自己的訂單與配送進度。本聊天室不索取訂單編號、密碼或付款資料。',button('前往會員訂單',{type:'uri',uri:links('orders')}))]);
+  else if (intent.kind === 'categories') messages=store.categories.length ? cards('選擇商品分類',store.categories.slice(0,10).map(c => card(c.name,'選擇分類，看看適合你的商品。',button('查看分類',{type:'postback',data:`v=1&action=category&ref=${encodeURIComponent(c.id)}`})))) : txt('商品分類尚未設定。');
+  else if (['featured','category','search'].includes(intent.kind)) {
+    const products=activeProducts(store,now).filter(p => intent.kind==='featured' ? p.featured : intent.kind==='category' ? p.categoryId===intent.ref : intent.refs.includes(p.id));
+    messages=products.length ? cards('商品推薦・價格與供應以商品頁為準',products.slice(0,10).map(p => card(p.name,p.description,button('查看商品',{type:'uri',uri:links(`product:${p.id}`)}),p.imageUrl && safeUrl(p.imageUrl,store)))) : txt('目前沒有符合條件的可導購商品，請查看其他分類或洽詢客服。');
+  } else if (intent.kind==='offers') {
+    const offers=activeOffers(store,now);
+    messages=offers.length ? cards('本期優惠・請查看適用條件',offers.map(p => card(p.title,`${p.description}\n效期至 ${new Date(p.endsAt).toLocaleDateString('zh-TW',{timeZone:'Asia/Taipei'})}`,button('查看優惠',{type:'uri',uri:links(`offer:${p.id}`)})))) : txt('目前沒有已公布且有效的優惠。歡迎查看熱銷商品。');
+  } else if (intent.kind==='faq') messages=txt(store.faq.find(f => f.id===intent.ref && f.enabled)?.answer ?? store.fallback,['客服與購物說明','真人客服','主選單']);
+  else if (intent.kind==='help') messages=txt('可詢問已公布的購物、配送與退換貨規則。\n需要真人處理，請輸入「真人客服」。\n查訂單請使用「我的訂單」登入商店網站。',['真人客服','我的訂單','主選單']);
+  else messages=txt(intent.kind==='invalid' ? '這個選項已失效，請重新點選主選單。' : store.fallback,['主選單','真人客服']);
+  return {state,messages,caseChanged};
+}
+
+let store=structuredClone(DEMO_STORE);
+const $=s=>document.querySelector(s),chat=$('#chat');let state=initialState();
+const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text)n.textContent=text;return n;};
+function status(){
+  $('#state-label').textContent={bot:'自動導購中',waiting:'等待客服接單',agent:'客服已接管'}[state.mode];
+  $('#case-label').textContent=state.caseId?`案件 ${state.caseId}`:'尚未建立客服案件';
+  $('#accept').disabled=state.mode!=='waiting';$('#resolve').disabled=state.mode==='bot';
+}
+function system(text){chat.append(el('div','system',text));chat.scrollTop=chat.scrollHeight;}
+function user(text){const row=el('div','message user');row.append(el('div','bubble',text));chat.append(row);}
+function act(action){
+  if(action.type==='uri'){
+    $('#link-value').textContent=action.uri;$('#link-title').textContent=action.label;$('#link-dialog').showModal();return;
+  }
+  if(action.type==='postback'){user(action.label);sendEvent({type:'postback',postback:{data:action.data}});}else send(action.text);
+}
+function render(message){
+  const row=el('div','message');row.append(el('div','avatar',Array.from(config.brand)[0]));
+  if(message.type==='text')row.append(el('div','bubble',message.text));
+  else if(message.type==='flex'){
+    const list=el('div','flexlist'),bubbles=message.contents.type==='carousel'?message.contents.contents:[message.contents];
+    for(const [i,b] of bubbles.entries()){
+      const c=el('article','flex-card'),title=b.body.contents[0].text,body=el('div','flex-body');
+      const art=el('div','flex-art');const object=el('span','product-object '+(title.includes('杯')?'cup':title.includes('袋')?'bag':title.includes('衫')?'shirt':'abstract'));art.setAttribute('aria-hidden','true');art.append(object,el('small','art-label','DEMO COLLECTION / 0'+(i+1)));c.append(art);body.append(el('h4','',title),el('p','',b.body.contents[1].text));
+      for(const a of b.footer.contents){const btn=el('button','',a.action.label);btn.onclick=()=>act(a.action);body.append(btn);}c.append(body);list.append(c);
+    }row.append(list);
+  }
+  chat.append(row);$('#quick').replaceChildren();
+  for(const item of message.quickReply?.items??[]){const b=el('button','',item.action.label);b.onclick=()=>act(item.action);$('#quick').append(b);}
+}
+function sendEvent(event){const intent=parseIntent(event,store);if(state.mode==='bot'&&['featured','categories','offers','orders','help'].includes(intent.kind)){visited.add(intent.kind);progress();}const result=route(intent,state,store,{newCaseId:`DEMO-${crypto.randomUUID().slice(0,8).toUpperCase()}`});state=result.state;result.messages.forEach(render);if(!result.messages.length)system('訊息留在展示聊天室，等待人工處理；機器人不再搶答。');status();chat.scrollTop=chat.scrollHeight;}
+function send(text){if(!text.trim())return;user(text);sendEvent({type:'message',message:{type:'text',text}});}
+document.querySelectorAll('[data-message]').forEach(b=>b.onclick=()=>send(b.dataset.message));
+$('#composer').onsubmit=e=>{e.preventDefault();send($('#input').value);$('#input').value='';};
+$('#reset').onclick=reset;
+$('#accept').onclick=()=>{if(state.mode!=='waiting')return;state.mode='agent';status();system('展示客服已接單。後續問答由真人處理。');};
+$('#resolve').onclick=()=>{if(state.mode==='bot')return;state={...state,mode:'bot',caseId:null};status();system('展示客服已結案，自動導購已恢復。');};
+$('#close-dialog').onclick=$('#back-chat').onclick=()=>$('#link-dialog').close();
+const defaults={version:1,brand:'MORI SELECT',welcome:'把日常，過成喜歡的樣子。',theme:'forest',catalog:'normal',offers:'none'};
+let config={...defaults};const visited=new Set();
+const entrances=[['featured','熱銷'],['categories','分類'],['offers','優惠'],['orders','訂單'],['help','說明']];
+function progress(){
+  $('#progress-label').textContent=`已體驗 ${visited.size} / 5 個入口`;
+  $('#journey-dots').replaceChildren(...entrances.map(([key,label])=>{const n=el('span',visited.has(key)?'done':'',`${visited.has(key)?'✓':'○'} ${label}`);return n;}));
+}
+function reset(){state=initialState();visited.clear();progress();chat.replaceChildren(el('div','day','今天 · 展示對話'));$('#quick').replaceChildren();$('#input').value='';sendEvent({type:'follow'});}
+function apply(next){
+  config=next;store=structuredClone(DEMO_STORE);store.brand=config.brand;
+  store.welcome=`歡迎來到 ${config.brand} 展示店。\n${config.welcome}\n\n從熱銷商品開始探索，或選一個喜歡的分類。商品與連結均為示範，不會產生訂單。`;
+  if(config.catalog==='empty')store.products.forEach(p=>p.enabled=false);
+  if(config.offers==='active')store.promotions=[{id:'preview',title:'本月選物提案・展示活動',description:'活動版位示範，未提供實際折扣或兌換權益。正式內容須由商家設定。',url:'https://example.com/preview-campaign',enabled:true,startsAt:new Date(Date.now()-86400000).toISOString(),endsAt:new Date(Date.now()+7*86400000).toISOString()}];
+  document.body.dataset.theme=config.theme;$('#phone-brand').textContent=config.brand;$('.wordmark').textContent=config.brand+' ／';
+  $('#brand').value=config.brand;$('#welcome').value=config.welcome;$('#catalog').value=config.catalog;$('#offers').value=config.offers;
+  document.querySelector(`[name="theme"][value="${config.theme}"]`).checked=true;reset();
+}
+function validate(value){
+  if(!value||value.version!==1||typeof value.brand!=='string'||!value.brand.trim()||value.brand.length>32||typeof value.welcome!=='string'||!value.welcome.trim()||value.welcome.length>160||!['forest','rose','ocean'].includes(value.theme)||!['normal','empty'].includes(value.catalog)||!['none','active'].includes(value.offers))throw new Error('設定格式不符，請使用本模板匯出的 JSON。');
+  return {version:1,brand:value.brand.trim(),welcome:value.welcome.trim(),theme:value.theme,catalog:value.catalog,offers:value.offers};
+}
+$('#settings').onsubmit=e=>{e.preventDefault();try{apply(validate({version:1,brand:$('#brand').value,welcome:$('#welcome').value,theme:document.querySelector('[name="theme"]:checked').value,catalog:$('#catalog').value,offers:$('#offers').value}));$('#settings-feedback').textContent='已套用設定，對話已重新開始。';}catch(error){$('#settings-feedback').textContent=error.message;}};
+$('#export').onclick=()=>{const blob=new Blob([JSON.stringify(config,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=el('a');a.href=url;a.download='line-shopping-preview.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#settings-feedback').textContent='已匯出目前套用的設定（不含對話）。';};
+$('#import').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>10000)throw new Error('設定檔過大，請使用本模板匯出的 JSON。');apply(validate(JSON.parse(await file.text())));$('#settings-feedback').textContent='設定已匯入，對話已重新開始。';}catch(error){$('#settings-feedback').textContent=error instanceof SyntaxError?'無法讀取 JSON，請確認檔案內容。':error.message;}finally{e.target.value='';}};
+$('#present').onclick=()=>{const active=document.body.classList.toggle('presenting');$('#present').setAttribute('aria-pressed',String(active));$('#present').textContent=active?'返回編輯 ↙':'專注預覽 ↗';};
+apply(defaults);
+
+})();</script></body></html>
