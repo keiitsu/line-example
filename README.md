@@ -11,6 +11,15 @@
 
 ## 線上展示
 
+### C 型高單價／長決策 AI 諮詢模板（單一 HTML）
+
+- [直接開啟 C 型互動模板](https://keiitsu.github.io/line-example/consultation-template.html)
+- [HTML 原始檔／下載](https://github.com/keiitsu/line-example/blob/main/docs/consultation-template.html)：按 Download raw file，或在預覽頁按「下載獨立 HTML」，儲存後用 Chrome、Edge 或 Firefox 開啟。
+- 樣式、JavaScript 與示範資料已全部內嵌；可直接開啟本機 HTML，不需要 Node.js、本機伺服器、API 金鑰或網路連線。
+- 保留知識問答、六種服務情境、需求填寫與摘要確認、顧問接單、互動架構圖、知識編輯／匯出及串接清單。
+- AI 與案件皆為模擬，不會呼叫真實服務或發送 LINE 訊息。正式 AI 供應商仍待選定。
+- `docs/consultation-template.html` 供 GitHub Pages 使用；`public/consultation-template.html` 為相同檔案，供應用程式靜態資產發布使用。更新時同步兩份。
+
 ### 可自訂品牌的 A 型導購模板（單一 HTML）
 
 - [直接開啟互動模板](https://keiitsu.github.io/line-example/shopping-template.html)

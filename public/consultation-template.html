@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C 型 LINE｜AI 諮詢建置模板</title><style>
+:root{font-family:"Microsoft JhengHei","PingFang TC",sans-serif;color:#233f38;background:#f6f7f2;font-size:15px;line-height:1.65}*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:4px}button{cursor:pointer;border:0;border-radius:9px;background:#264e41;color:white;padding:10px 16px}button:hover{filter:brightness(.94)}button:disabled{opacity:.5;cursor:wait}a{color:inherit;text-decoration:none}button.secondary{background:#edf2eb;color:#24483b;border:1px solid #d7e2d7}button.text-button{background:transparent;color:#527065}.header{display:flex;justify-content:space-between;align-items:center;padding:24px max(24px,calc((100vw - 1320px)/2));border-bottom:1px solid #dae1d6}.header>a:last-child{font-size:13px}.brand{font-size:25px;font-weight:700;letter-spacing:.1em}.brand span{font-size:10px;letter-spacing:.16em;margin-left:12px}main{max-width:1370px;padding:0 25px;margin:auto}.hero{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:54px 10px 43px}.eyebrow{font-size:10px;font-weight:700;letter-spacing:.17em;color:#6c7f66}h1{font-size:clamp(32px,3.4vw,48px);font-weight:600;line-height:1.35;letter-spacing:.025em;margin:14px 0}h2{font-size:23px;margin:0}h3{font-size:18px;margin:12px 0 20px}p{color:#667668}.hero p{margin:14px 0 0}.hero-card{padding:28px 32px;background:#eaf0e6;border:1px solid #d8e3d3;border-radius:16px;min-width:350px;box-shadow:10px 10px 0 #f0f2e9}.hero-card strong{display:block;font-size:24px;margin-top:16px}.hero-card p{font-size:14px;margin:8px 0 16px}.hero-card small{color:#6b7769}.badge{display:inline-block;font-size:11px;border-radius:30px;background:#fff9e5;color:#6a5d34;padding:4px 12px}.tabs{display:flex;border-bottom:1px solid #d6dfd2;gap:6px}.tabs button{background:none;border-radius:0;color:#6b786e;padding:17px 22px;border-bottom:3px solid transparent}.tabs button[aria-pressed=true]{color:#244e3f;border-color:#244e3f;font-weight:700}.intro{margin:30px 0 25px}.intro p{margin:5px 0;font-size:14px}.experience-grid{display:grid;grid-template-columns:minmax(220px,.9fr) minmax(340px,1.6fr) minmax(220px,.9fr);gap:22px;align-items:start}.scenario-card,.trace-card,.detail-card{background:white;border:1px solid #dfe5db;border-radius:14px;padding:24px}.scenario-buttons{display:grid;gap:10px;margin-bottom:25px}.scenario-buttons button{background:#f4f6f0;color:#345547;text-align:left;font-size:13px;padding:12px}.scenario-card label{display:block;font-size:13px;margin-bottom:8px}select{width:100%;padding:9px;border:1px solid #d3ddd0;border-radius:8px;background:#fff;color:#304c40}.hint{font-size:12px;line-height:1.8;color:#768171}.scenario-card>.secondary,.scenario-card>.text-button{display:block;width:100%;margin-top:12px;font-size:12px}.phone{border:1px solid #d4ddd0;border-radius:18px;overflow:hidden;background:#fff;box-shadow:0 12px 30px #263d3d0b}.phone-header{display:flex;align-items:center;gap:12px;padding:17px 21px;background:#fff;border-bottom:1px solid #e5eadf}.avatar{background:#2c5144;color:#fff;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;font-family:serif;font-size:20px}.phone-header small{display:block;font-size:11px;color:#829080}.online{width:7px;height:7px;background:#86a583;border-radius:50%;margin-left:auto}.chat{height:365px;overflow:auto;padding:24px 20px;background:#edf1e8;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}.bubble{border-radius:2px 14px 14px;padding:12px 15px;background:white;max-width:90%;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 2px 3px #33443306}.bubble.user{background:#d4e3c7;align-self:flex-end;border-radius:14px 2px 14px 14px}.bubble.system{background:transparent;box-shadow:none;font-size:12px;color:#798875;max-width:100%;align-self:center}.bubble .source{border-top:1px solid #e2e8dc;font-size:10px;color:#87917f;display:block;margin-top:10px;padding-top:7px}.bubble button{margin:8px 6px 0 0;font-size:12px;padding:7px 11px}.quick{display:flex;gap:7px;padding:10px 12px;overflow:auto;min-height:50px}.quick button{white-space:nowrap;background:#fff;border:1px solid #ccd9c9;color:#3b5c45;padding:5px 13px;border-radius:25px;font-size:12px}#composer{display:flex;border-top:1px solid #e6eadf;padding:10px;gap:8px}#message{min-width:0;flex:1;border:0;background:#f5f6f2;border-radius:7px;padding:9px 10px;font-size:13px}.menu{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #e1e8dc;background:#f9faf6}.menu button{padding:16px 3px;background:none;color:#456448;border-radius:0;font-size:12px;border-right:1px solid #e1e8dc}.menu button:first-child{background:#315c46;color:white}dl{margin:0}dt{font-size:12px;color:#81907c;margin-top:17px}dd{margin:3px 0;font-size:16px}#count{font-size:34px}.trace-title{margin-top:18px;padding-top:20px;border-top:1px solid #e7ece2;font-size:13px}.trace-title span{float:right;color:#91a18a;font-size:11px}#trace{padding-left:18px;font-size:12px;color:#60765d;max-height:185px;overflow:auto}#trace li{padding:4px 0}.architecture-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}.nodes{display:grid;gap:12px}.nodes button{padding:16px 22px;text-align:left;background:#edf1e6;color:#294b3c;border:1px solid #d9e1d2}.nodes button.active{background:#2b5040;color:white}.nodes small{display:block;font-size:11px;opacity:.75;margin-left:28px}.detail-card h3{margin-top:0}.detail-card ul,.detail-card ol{padding-left:20px;color:#667662}.detail-card li{margin-bottom:12px}.detail-card code{font-size:12px;overflow-wrap:anywhere}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:25px;margin-top:25px}.principles article{padding:22px;background:#edf1e7;border-radius:12px}.principles p{font-size:13px}.knowledge-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:25px}textarea{width:100%;resize:vertical;background:#fff;border:1px solid #d5ded0;border-radius:12px;padding:18px;margin-top:12px;line-height:1.6;font-family:Consolas,monospace;font-size:12px;color:#345445}label{font-size:13px}.actions{display:flex;gap:10px;margin-top:14px}.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}#checklist label{display:flex;gap:10px;align-items:flex-start;margin:18px 0}input[type=checkbox]{accent-color:#315943;margin-top:5px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;background:#f1f4eb;padding:18px;border-radius:9px}footer{text-align:center;padding:40px 10px;color:#7f8b79;font-size:11px}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}[hidden]{display:none!important}@media(max-width:1050px){.experience-grid{grid-template-columns:230px minmax(320px,1fr)}.trace-card{grid-column:1/-1}.trace-card dl{display:flex;gap:20px;align-items:center}.trace-card dt{margin:0}#count{font-size:24px}.hero-card{min-width:300px;padding:22px}.brand span{display:none}}@media(max-width:700px){main{padding:0 16px}.header{padding:18px}.hero{display:block;padding:32px 0}.hero-card{min-width:0;margin-top:25px}.hero-card small br{display:none}.hero h1{font-size:30px}.tabs{overflow:auto;white-space:nowrap}.tabs button{padding:14px 12px;font-size:13px}.experience-grid,.architecture-grid,.knowledge-grid,.connect-grid,.principles{grid-template-columns:minmax(0,1fr)}.phone{grid-row:1}.scenario-card{grid-row:2}.scenario-buttons{grid-template-columns:1fr 1fr;gap:8px}.scenario-card,.trace-card,.detail-card{padding:20px}.trace-card dl{display:block}.trace-card dt{margin-top:10px}.chat{height:350px}.intro h2{font-size:21px}.hero-card strong{font-size:22px}.actions{flex-wrap:wrap}.header>a:last-child{font-size:11px}}
+
+</style></head>
+<body><header class="header"><a class="brand" href="#experience">拾策 <span>CONSULTATION STUDIO</span></a><a id="download-html" href="#" download="consultation-template.html">下載獨立 HTML ↓</a></header>
+<main><section class="hero"><div><div class="eyebrow">C MODEL · HIGH-CONSIDERATION SERVICES</div><h1>先解答，<br>再展開有深度的合作。</h1><p>讓公開知識接住初次詢問，<br>把值得深入討論的需求交給顧問。</p></div><div class="hero-card"><span class="badge">單一 HTML · 可離線預覽</span><strong>AI 諮詢建置模板</strong><p>知識問答 → 需求確認 → 真人交接</p><small>此頁使用本機模擬選答，不會呼叫 AI 服務、<br>發送 LINE 訊息或保存真實案件。</small></div></section>
+<nav class="tabs" aria-label="模板區域"><button data-tab="experience" aria-pressed="true">01　對話體驗</button><button data-tab="architecture" aria-pressed="false">02　建置架構</button><button data-tab="knowledge" aria-pressed="false">03　知識模板</button><button data-tab="connect" aria-pressed="false">04　串接準備</button></nav>
+<section id="experience" class="panel"><div class="intro"><h2>從一個問題，開始體驗。</h2><p>試試一般詢問、留下需求，或切換故障情境。</p></div><div class="experience-grid"><aside class="scenario-card"><div class="eyebrow">SCENARIOS</div><h3>你想了解什麼？</h3><div class="scenario-buttons"><button data-question="第一次討論要準備什麼？">01　第一次討論的準備</button><button data-question="如何評估客製專案範圍？">02　評估合作範圍</button><button data-question="可以保證成功嗎？">03　需要顧問確認的承諾</button><button data-question="你們有海外分公司嗎？">04　知識庫沒有的問題</button><button data-question="我的電話是 0912345678">05　避免傳送聯絡資料</button></div><label for="scenario">模擬服務狀態</label><select id="scenario"><option value="normal">正常：選擇核准答案</option><option value="clarify">要求補充問題</option><option value="handoff">建議真人協助</option><option value="outage">服務連線失敗</option><option value="invalid">服務傳回無效來源</option><option value="off">AI 尚未啟用</option></select><p class="hint">選擇需要知識回答的問題，才能觸發服務情境。填寫需求與真人接管優先。</p><button id="interrupt" class="secondary">測試等待時收到新訊息</button><button id="accept" class="secondary">顧問接單（需先送出需求）</button><button id="reset" class="text-button">清除本頁體驗</button></aside>
+<div class="phone"><div class="phone-header"><span class="avatar">拾</span><div><b>拾策諮詢助理</b><small id="mode">智慧問答 · 模擬服務</small></div><span class="online"></span></div><div id="chat" class="chat" role="log" aria-live="polite" aria-label="示範對話"></div><div id="quick" class="quick"></div><form id="composer"><label class="sr-only" for="message">輸入問題</label><input id="message" maxlength="1000" placeholder="輸入問題，請使用虛構資料" autocomplete="off"><button aria-label="送出訊息">↑</button></form><div class="menu"><button data-question="留下需求">留下需求</button><button data-question="案例分享">案例分享</button><button data-question="免費資源">免費資源</button><button data-question="真人協助">真人協助</button></div></div>
+<aside class="trace-card"><div class="eyebrow">LIVE PREVIEW</div><h3>這段對話的處理</h3><dl><dt>目前狀態</dt><dd id="state-label">自動回覆</dd><dt>待接需求</dt><dd id="lead-label">尚未建立</dd><dt>知識選答次數</dt><dd id="count">0</dd></dl><div class="trace-title">處理紀錄 <span>僅本頁</span></div><ol id="trace"></ol><p class="hint">問答不會自動建立名單。完成摘要確認，才會產生待接案件；AI 不會修改報價或成交階段。</p></aside></div></section>
+<section id="architecture" class="panel" hidden><div class="intro"><h2>每一層，都有清楚的責任。</h2><p>點選節點，查看資料如何流動，以及故障時的處理方式。</p></div><div class="architecture-grid"><div id="nodes" class="nodes"></div><article id="node-detail" class="detail-card" aria-live="polite"></article></div><div class="principles"><article><b>核准內容才可回覆</b><p>AI 只選一筆完整答案；陌生來源或額外文字會被拒絕。</p></article><article><b>真人優先</b><p>等待顧問、已接單或正在填表時，AI 不會插入回答。</p></article><article><b>獨立更換 AI 服務</b><p>固定 consultation-ai.v1 契約，由轉接層處理各供應商格式。</p></article></div></section>
+<section id="knowledge" class="panel" hidden><div class="intro"><h2>把可信內容，變成可維護的知識。</h2><p>編輯示範資料後套用，可回到對話測試。正式版本預設為空，另需商家審核。</p></div><div class="knowledge-grid"><div><label for="kb-editor">知識 JSON（只處理公開資料）</label><textarea id="kb-editor" spellcheck="false" rows="24"></textarea><div class="actions"><button id="apply-kb">套用到本頁</button><button id="export-kb" class="secondary">下載待審核模板</button></div><p id="kb-status" role="status"></p></div><aside class="detail-card"><h3>內容發布條件</h3><ol><li>標題、觸發詞與完整回答。</li><li>來源文件與核准人。</li><li>核准日期、生效日與到期日。</li><li>approved = true 且 published。</li><li>最多 100 筆，單筆回答最多 900 字。</li></ol><p>下載時會把所有資料設為待審核，清除核准人與核准日。請替換示範內容後重新審查。</p><p>此版採觸發詞檢索，最多提供 5 筆給 AI。沒有匹配來源時直接提示補充或轉真人。</p></aside></div></section>
+<section id="connect" class="panel" hidden><div class="intro"><h2>先把接點準備好，服務之後再選。</h2><p>畫面用於建置檢視；勾選不會改動伺服器或驗證金鑰。</p></div><div class="connect-grid"><article class="detail-card"><h3>上線前待完成</h3><div id="checklist"></div><p id="check-status" role="status"></p></article><article class="detail-card"><h3>固定串接契約</h3><div class="badge">POST /v1/select</div><pre id="contract"></pre><p>Gateway 接收單次問題與核准來源，回傳來源 ID。服務金鑰僅存在伺服器。</p><p>開發用 mock Gateway 已提供；正式 AI 適配器留待選定供應商後實作。</p></article></div></section>
+<noscript>此互動模板需要瀏覽器允許 JavaScript。請以 Chrome、Edge 或 Firefox 開啟下載的 HTML。</noscript><footer>C｜高單價／長決策型 · 展示品牌與知識均為虛構 · 正式自動回覆預設停用</footer></main><script>
+(()=>{'use strict';
+
+const standaloneSource='<!doctype html>\n'+document.documentElement.outerHTML;
+document.querySelector('#download-html').addEventListener('click',event=>{
+ event.preventDefault();
+ const url=URL.createObjectURL(new Blob([standaloneSource],{type:'text/html;charset=utf-8'}));
+ const link=document.createElement('a');link.href=url;link.download='consultation-template.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
+});
+document.querySelector('.brand').addEventListener('click',()=>document.querySelector('[data-tab="experience"]').click());
+
+const STAGES = {new:'剛認識',considering:'考慮中',quoted:'已報價',won:'已成交',paused:'暫緩'};
+const STATUSES = {assigned:'待接單',accepted:'已接單',contacted:'已聯繫',closed:'已結案'};
+const initialState = () => ({draft:null,activeLeadId:null,mode:'bot',subscribed:false,contactAllowed:true,lastAt:0});
+const textMessage = text => ({type:'text',text});
+const action = (label,text) => ({type:'action',action:{type:'message',label,text}});
+function reply(text, options=[]) {return [{...textMessage(text),...(options.length?{quickReply:{items:options.map(x=>action(x,x))}}:{})}];}
+function safeUrl(s){try{const u=new URL(s);return u.protocol==='https:'&&!u.username&&!u.password;}catch{return false;}}
+function validateBusiness(b){
+  const errors=[];
+  if(!b.approved)errors.push('商家內容尚未核准');
+  for(const key of ['brand','welcome','privacyText','privacyVersion','serviceHoursText'])if(!b[key]?.trim())errors.push(`請填 ${key}`);
+  if(!safeUrl(b.privacyUrl))errors.push('請填 HTTPS 資料使用說明連結');
+  if(!b.needs?.length||b.needs.length>10||new Set(b.needs.map(n=>n.id)).size!==b.needs.length)errors.push('需求類別須為 1～10 個不同 ID');
+  if(!b.staff?.length||new Set(b.staff.map(n=>n.id)).size!==b.staff.length)errors.push('請設定不同的人員 ID');
+  if(!b.staff.some(s=>s.id===b.backupOwner))errors.push('備援負責人不存在');
+  for(const n of b.needs)if(!/^[a-z0-9_-]{1,32}$/.test(n.id)||!n.label||n.label.length>18||(n.owner&&!b.staff.some(s=>s.id===n.owner)))errors.push('需求類別或負責人格式錯誤');
+  for(const s of b.staff)if(!/^[a-z0-9_-]{1,32}$/.test(s.id)||!s.name)errors.push('人員設定錯誤');
+  for(const list of [b.resources,b.cases])for(const c of list)if(!c.title||c.title.length>80||!c.description||c.description.length>500||!safeUrl(c.url))errors.push('資源／案例須有核准標題、摘要、HTTPS 連結');
+  for(const f of b.faq)if(!f.id||!['exact','keyword'].includes(f.mode)||!f.triggers?.length||!f.text||f.text.length>4000||!Number.isFinite(f.priority))errors.push('FAQ 設定錯誤');
+  const cal=b.calendar;
+  try{new Intl.DateTimeFormat('en',{timeZone:cal.timezone});}catch{errors.push('時區錯誤');}
+  if(!cal.weekdays?.length||cal.weekdays.some(x=>!Number.isInteger(x)||x<0||x>6)||!Number.isInteger(cal.startHour)||!Number.isInteger(cal.endHour)||cal.startHour<0||cal.endHour>24||cal.startHour>=cal.endHour)errors.push('工作日曆錯誤');
+  for(const k of ['acceptMinutes','contactMinutes','draftMinutes','closedRetentionDays'])if(!Number.isInteger(b[k])||b[k]<1||b[k]>365)errors.push(`${k} 設定錯誤`);
+  return errors;
+}
+
+function workingDeadline(now, minutes, calendar) {
+  const fmt=new Intl.DateTimeFormat('en-CA',{timeZone:calendar.timezone,year:'numeric',month:'2-digit',day:'2-digit',weekday:'short',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  const weekdays={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  let t=Math.ceil(now/60000)*60000,remaining=minutes;
+  for(let i=0;i<60*24*60;i++,t+=60000){
+    const p=Object.fromEntries(fmt.formatToParts(t).map(x=>[x.type,x.value]));
+    if(calendar.weekdays.includes(weekdays[p.weekday])&&Number(p.hour)>=calendar.startHour&&Number(p.hour)<calendar.endHour&&!calendar.holidays.includes(`${p.year}-${p.month}-${p.day}`)){
+      if(--remaining===0)return t+60000;
+    }
+  }
+  throw new Error('calendar_has_no_capacity');
+}
+
+function cards(items, emptyText){
+  if(!items.length)return reply(emptyText,['留下需求','使用說明']);
+  return [{type:'flex',altText:'查看內容',contents:{type:'carousel',contents:items.slice(0,10).map(c=>({type:'bubble',body:{type:'box',layout:'vertical',spacing:'md',contents:[{type:'text',text:c.title,weight:'bold',wrap:true},{type:'text',text:c.description,wrap:true,size:'sm'}]},footer:{type:'box',layout:'vertical',contents:[{type:'button',action:{type:'uri',label:'閱讀內容',uri:c.url}}]}}))}}];
+}
+function review(d,b){return [{type:'flex',altText:'請確認需求摘要與聯繫用途',contents:{type:'bubble',body:{type:'box',layout:'vertical',spacing:'md',contents:[{type:'text',text:'確認您的需求',weight:'bold',size:'lg'},{type:'text',text:`${d.needLabel}\n${d.summary}\n稱呼：${d.name||'未提供'}\n聯繫：${d.channel}${d.contact?' / '+d.contact:''}`,wrap:true},{type:'text',text:b.privacyText,wrap:true,size:'sm',color:'#637169'}]},footer:{type:'box',layout:'vertical',contents:[{type:'button',style:'primary',action:{type:'postback',label:'同意用途並送出',data:`v=1&action=submit&ref=${d.id}`}},{type:'button',action:{type:'message',label:'修改需求',text:'修改需求'}},{type:'button',action:{type:'message',label:'取消',text:'取消'}}]}}}];}
+
+// Shared pure conversation engine. The backend persists state + lead + index outbox atomically.
+function route(input, previous, b, {now=Date.now(),newId=crypto.randomUUID(),lead=null}={}){
+  const state=structuredClone(previous), say=(text,opts=[])=>({state,messages:reply(text,opts)});
+  if(state.draft&&state.draft.expiresAt<=now)state.draft=null;
+  const t=input.text?.normalize('NFKC').trim()??'';
+  if(input.type==='unsend')return {state,messages:[]};
+  if(input.type==='unfollow'){state.draft=null;state.subscribed=false;state.contactAllowed=false;state.mode='bot';return {state,messages:[],stopContact:true};}
+  if(t==='停止聯繫'){state.contactAllowed=false;state.subscribed=false;state.draft=null;state.mode='bot';return {...say('已停止後續聯繫與內容訂閱。若日後有需要，可輸入「留下需求」重新提出申請。'),stopContact:true};}
+  if(t==='取消訂閱'){state.subscribed=false;return say('已取消教育內容訂閱。已提交需求的服務聯繫不受影響；如需全部停止，請輸入「停止聯繫」。');}
+  if(t==='訂閱內容'){state.subscribed=true;return say('已記錄教育內容訂閱偏好，您可隨時輸入「取消訂閱」。目前未啟用自動行銷推播。');}
+  if(input.type==='follow')return say(b.welcome||'歡迎。可先閱讀案例與資源，或留下需求。',['留下需求','案例分享','免費資源']);
+  if(t==='恢復機器人'){state.mode='bot';return say('已恢復自動回覆；已提交需求仍保留在待辦中。',['留下需求','我的需求','免費資源']);}
+  if(t==='我的需求')return say(lead?`案件 ${lead.id}\n處理：${STATUSES[lead.status]}\n決策階段：${STAGES[lead.stage]}\n${lead.status==='closed'?'如有新需求，可重新提出。':'受理不代表已完成諮詢預約。'}`:'目前沒有已提交需求。',['留下需求','使用說明']);
+  if(state.mode!=='bot')return {state,messages:[],inbound:t||'[非文字操作]'};
+  if(t==='使用說明'||t==='主選單')return say('可使用：留下需求、預約諮詢、案例分享、免費資源、我的需求、真人協助。表單可隨時取消；預約諮詢為時段需求受理，須經顧問確認。',['留下需求','案例分享','免費資源']);
+  if(t==='案例分享')return {state,messages:cards(b.cases,'案例內容尚在準備中。可以先留下需求，由顧問了解您的情況。')};
+  if(t==='免費資源')return {state,messages:cards(b.resources,'公開資源尚在準備中，您仍可先了解服務或留下需求。')};
+  if(t==='取消'){state.draft=null;return say('本次填寫已取消，先前提交的案件不會刪除。',['留下需求','案例分享']);}
+  if(['留下需求','預約諮詢','真人協助','修改需求'].includes(t)){
+    state.draft={id:newId,step:'need',expiresAt:now+b.draftMinutes*60000};
+    return say(`請選擇需求類型。${t==='預約諮詢'?'可在需求中寫下偏好時段，顧問確認後才算預約成立。':''}` ,b.needs.map(n=>n.label));
+  }
+  const d=state.draft;
+  if(d){
+    d.expiresAt=now+b.draftMinutes*60000;
+    if(d.step==='need'){
+      const n=b.needs.find(n=>n.label===t);if(!n)return say('請從選項選擇需求類型。',b.needs.map(n=>n.label));
+      d.needId=n.id;d.needLabel=n.label;d.step='summary';return say('請簡述想解決的問題（5～1000 字）。不要填寫密碼或敏感文件。');
+    }
+    if(d.step==='summary'){if(t.length<5||t.length>1000)return say('請以 5～1000 字描述需求。');d.summary=t;d.step='name';return say('方便如何稱呼您？可輸入「略過」。');}
+    if(d.step==='name'){if(!t||t.length>60)return say('稱呼請勿超過 60 字，或輸入「略過」。');d.name=t==='略過'?'':t;d.step='channel';return say('希望以哪個方式聯繫？',['LINE','電話','Email']);}
+    if(d.step==='channel'){
+      if(!['LINE','電話','Email'].includes(t))return say('請選擇聯繫方式。',['LINE','電話','Email']);
+      d.channel=t;d.contact='';d.step=t==='LINE'?'review':'contact';return t==='LINE'?{state,messages:review(d,b)}:say(`請輸入${t==='電話'?'聯絡電話':'Email'}，僅用於本次需求聯繫。`);
+    }
+    if(d.step==='contact'){
+      const valid=d.channel==='電話'?/^\+?[0-9 ()-]{7,24}$/.test(t):/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)&&t.length<=254;
+      if(!valid)return say('格式不正確，請重新輸入，或輸入「修改需求」重新選聯繫方式。');
+      d.contact=t;d.step='review';return {state,messages:review(d,b)};
+    }
+    if(d.step==='review'){
+      if(input.submitRef!==d.id)return {state,messages:review(d,b)};
+      const owner=b.needs.find(n=>n.id===d.needId)?.owner??null;
+      const newLead={id:d.id,needId:d.needId,needLabel:d.needLabel,summary:d.summary,name:d.name,channel:d.channel,contact:d.contact,contactVerified:d.channel==='LINE',owner,stage:'new',status:'assigned',outcome:null,version:1,createdAt:now,updatedAt:now,acceptedAt:null,firstContactAt:null,nextFollowUpAt:null,dueAt:workingDeadline(now,b.acceptMinutes,b.calendar),escalatedAt:null,contactAllowed:true,privacyVersion:b.privacyVersion};
+      state.activeLeadId=d.id;state.draft=null;state.contactAllowed=true;state.mode='waiting';
+      return {...say(`需求已受理。案件編號：${newLead.id}\n${b.serviceHoursText}\n尚待顧問接單，不代表諮詢時間已確認。\n等待期間可輸入「恢復機器人」閱讀資源。`),newLead};
+    }
+  }
+  if(input.submitRef)return say('這份摘要已送出或過期。請查看「我的需求」，或重新填寫。',['我的需求','留下需求']);
+  if(/價格|報價|多少錢/.test(t))return say('費用需依需求評估；請先留下需求，由顧問說明核准方案。',['留下需求']);
+  const rule=[...b.faq].sort((a,c)=>(a.mode==='exact'?0:1)-(c.mode==='exact'?0:1)||a.priority-c.priority).find(f=>f.triggers.some(w=>f.mode==='exact'?t===w:t.includes(w)));
+  return {...say(rule?.text??'可以先閱讀案例與資源，或留下需求讓顧問協助。',['留下需求','案例分享','免費資源']),...(!rule&&input.type==='message'&&t&&!state.draft?{aiQuery:t}:{})};
+}
+
+function canAccess(actor,lead){return actor.role==='manager'||!lead.owner||lead.owner===actor.id;}
+function changeLead(lead, cmd, actor, b, now=Date.now()){
+  if(!canAccess(actor,lead))throw new Error('forbidden');
+  if(cmd.version!==lead.version)throw new Error('version_conflict');
+  if(lead.status==='closed')throw new Error('case_closed');
+  const next={...lead,updatedAt:now,version:lead.version+1};
+  if(cmd.action==='assign'){
+    if(actor.role!=='manager'||!b.staff.some(s=>s.id===cmd.owner))throw new Error('forbidden');
+    next.owner=cmd.owner;next.escalatedAt=null;
+  }else if(cmd.action==='accept'){
+    if(lead.status!=='assigned')throw new Error('already_accepted');
+    next.owner=lead.owner??actor.id;next.status='accepted';next.acceptedAt=now;next.dueAt=workingDeadline(now,b.contactMinutes,b.calendar);next.escalatedAt=null;
+  }else if(cmd.action==='contacted'){
+    if(!lead.contactAllowed||lead.status==='assigned'||!cmd.reason?.trim())throw new Error('invalid_contact');
+    next.status='contacted';next.firstContactAt=lead.firstContactAt??now;next.dueAt=null;
+  }else if(cmd.action==='followup'){
+    if(!lead.contactAllowed||lead.status!=='contacted'||!Number.isFinite(cmd.at)||cmd.at<=now||!cmd.reason?.trim())throw new Error('invalid_followup');
+    next.nextFollowUpAt=cmd.at;next.dueAt=cmd.at;next.escalatedAt=null;
+  }else if(cmd.action==='stage'){
+    if(!Object.hasOwn(STAGES,cmd.stage)||!cmd.reason?.trim()||(['quoted','won'].includes(cmd.stage)&&!cmd.reference?.trim()))throw new Error('stage_evidence_required');
+    next.stage=cmd.stage;
+  }else if(cmd.action==='close'){
+    if(!['won','lost','nurture','invalid'].includes(cmd.outcome)||!cmd.reason?.trim()||(cmd.outcome==='won'&&!cmd.reference?.trim()))throw new Error('invalid_outcome');
+    next.status='closed';next.outcome=cmd.outcome;next.dueAt=null;next.nextFollowUpAt=null;if(cmd.outcome==='won')next.stage='won';
+  }else throw new Error('invalid_action');
+  return next;
+}
+
+const DEMO_BUSINESS = {
+  approved:true,brand:'拾策顧問 · 示範',
+  welcome:'歡迎來到拾策顧問示範帳號。先看看案例與指南，或告訴我們你想解決的問題，我們會依你選擇的方式聯繫。',
+  privacyText:'同意送出後，提供的資料僅用於本次需求評估與後續聯繫；不會自動訂閱行銷內容。此頁為展示，請勿輸入真實個資。',
+  privacyVersion:'demo-v1',privacyUrl:'https://example.com/privacy',serviceHoursText:'示範受理時段：週一至週五 09:00–18:00；實際服務時段待商家設定。',
+  needs:[{id:'consulting',label:'顧問諮詢',owner:'advisor'},{id:'project',label:'客製專案',owner:'advisor'},{id:'other',label:'其他需求',owner:null}],
+  staff:[{id:'manager',name:'管理者'},{id:'advisor',name:'服務顧問'}],backupOwner:'manager',
+  resources:[{id:'brief',title:'開始一個專案前，先釐清三件事',description:'示範指南：想改善的問題、目前做法，以及期待的成果。帶著這些資訊，讓第一次討論更有方向。',url:'https://example.com/guide'}],
+  cases:[{id:'process',title:'從需求到方案，合作如何展開？',description:'流程示意，非真實客戶案例：了解需求 → 討論範圍 → 核准提案 → 確認合作。正式版請替換成已授權的案例。',url:'https://example.com/case'}],
+  faq:[{id:'process',mode:'keyword',triggers:['流程','合作'],priority:1,text:'先留下需求，顧問了解範圍後，才會提出可核准的方案。'}],
+  calendar:{timezone:'Asia/Taipei',weekdays:[1,2,3,4,5],startHour:9,endHour:18,holidays:[]},acceptMinutes:60,contactMinutes:120,draftMinutes:30,closedRetentionDays:90
+};
+
+// Fictional demonstration content; never imported by src/knowledge.js.
+const DEMO_KNOWLEDGE={version:'demo-c-v1',records:[
+ {id:'prepare',title:'第一次討論如何準備',triggers:['準備','第一次','開始'],answer:'可以先整理三件事：想解決的問題、目前的做法，以及期待的成果。不必一開始就準備完整規格。你可以先閱讀資源，或留下需求讓顧問進一步了解。',action:'留下需求'},
+ {id:'scope',title:'如何釐清專案範圍',triggers:['範圍','評估','客製','需求'],answer:'先把目標、使用情境與必要限制列出，再區分這次必須完成與可分階段處理的項目。實際合作範圍與可行性，須經顧問了解需求後確認。',action:'留下需求'},
+ {id:'evidence',title:'案例如何作為參考',triggers:['案例','成果','參考'],answer:'看案例時，可以比較問題背景、執行方式與適用條件。案例呈現的是特定情境，不能直接推定你的專案會得到相同結果。正式案例請以商家核准資料為準。',action:'案例分享'},
+ {id:'consult',title:'諮詢時間如何確認',triggers:['諮詢','時間','時段'],answer:'可在需求摘要寫下偏好的討論時段。送出表單代表需求受理，顧問確認可用時間後才算諮詢預約成立。',action:'留下需求'}
+ ].map(r=>({...r,version:'1',approved:true,status:'published',approvedBy:'demo-only',approvedAt:'2026-01-01T00:00:00Z',validFrom:'2026-01-01T00:00:00Z',validTo:'2030-01-01T00:00:00Z',sourceRef:'fictional-demo-content'}))};
+
+// Shared pure policy. No credentials, network calls or lead write access.
+const AI_CONTRACT='consultation-ai.v1';
+const AI_COPY={
+ off:'智慧問答尚未啟用。可先閱讀案例與資源，或留下需求讓顧問協助。',
+ unavailable:'智慧問答暫時無法回覆。你仍可閱讀案例、取得資源，或留下需求。',
+ no_source:'目前沒有足夠的核准資料回答這個問題。可以補充想了解的內容，或點「真人協助」由顧問確認。',
+ clarify:'請再說明想了解的服務內容，例如討論前要準備什麼，或如何評估合作範圍。',
+ handoff:'這個問題需要顧問確認。請點「真人協助」填寫需求，送出後才會建立待接案件。',
+ sensitive:'請勿在一般問答輸入電話、Email、密碼或付款資料。聯繫資訊請使用「留下需求」表單提供。',
+ limit:'智慧問答目前較忙碌。可稍後再試，或點「留下需求」由顧問協助。'
+};
+const safeId=s=>typeof s==='string'&&/^[A-Za-z0-9_-]{1,80}$/.test(s);
+function classifyQuestion(input){
+ if(typeof input!=='string'||!input.trim()||input.length>1000)return {route:'fallback',reason:'invalid_input',text:AI_COPY.unavailable};
+ const q=input.normalize('NFKC').trim();
+ // These heuristics are not an authorization boundary. AI has no business tools.
+ if(/密碼|驗證碼|OTP|信用卡|身分證|身份證|(?:sk-|Bearer\s)[A-Za-z0-9_-]{8,}|[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}|(?:\+?\d[\d ()-]{7,}\d)/i.test(q))return {route:'fallback',reason:'sensitive_input',text:AI_COPY.sensitive};
+ if(/價格|報價|多少錢|折扣|保證|成功率|簽約|合約|退款|賠償|我的案件|我的進度|真人|人工|客訴|忽略.{0,12}(規則|指令)|ignore.{0,20}(instructions|rules)|system prompt|列出.{0,8}(客戶|名單|電話)/i.test(q))return {route:'handoff',reason:'human_required',text:AI_COPY.handoff};
+ return {route:'knowledge',query:q};
+}
+function knowledgeIssues(kb){
+ const issues=[];if(!kb||!safeId(kb.version)||!Array.isArray(kb.records)||kb.records.length>100)return ['invalid_knowledge'];
+ const ids=new Set();for(const r of kb.records){
+  if(!r||!safeId(r.id)||ids.has(r.id)){issues.push('invalid_or_duplicate_id');continue;}ids.add(r.id);
+  if(r.approved!==true||r.status!=='published')continue;
+  if(!safeId(r.version)||typeof r.title!=='string'||!r.title.trim()||r.title.length>80||typeof r.answer!=='string'||!r.answer.trim()||r.answer.length>900||typeof r.sourceRef!=='string'||!r.sourceRef.trim()||typeof r.approvedBy!=='string'||!r.approvedBy.trim()||!Number.isFinite(Date.parse(r.approvedAt))||!Number.isFinite(Date.parse(r.validFrom))||!Number.isFinite(Date.parse(r.validTo))||Date.parse(r.validFrom)>=Date.parse(r.validTo)||!Array.isArray(r.triggers)||!r.triggers.length||r.triggers.some(x=>typeof x!=='string'||x.trim().length<2||x.length>40)||!['留下需求','案例分享','免費資源','真人協助'].includes(r.action))issues.push('invalid_published_record');
+ }
+ return [...new Set(issues)];
+}
+function retrieveKnowledge(kb,query,_scope=null,now=Date.now()){
+ if(knowledgeIssues(kb).length)return [];
+ const q=query.normalize('NFKC').toLowerCase();
+ return kb.records.filter(r=>r.approved===true&&r.status==='published'&&Date.parse(r.approvedAt)<=now&&Date.parse(r.validFrom)<=now&&Date.parse(r.validTo)>now)
+ .map(r=>({r,score:r.triggers.filter(t=>q.includes(t.normalize('NFKC').toLowerCase())).length}))
+ .filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.r.id.localeCompare(b.r.id)).slice(0,5).map(x=>x.r);
+}
+function validateSelection(data,sources){
+ if(!data||typeof data!=='object'||Array.isArray(data)||Object.keys(data).some(k=>!['type','source_ids'].includes(k))||!['answer','clarify','handoff'].includes(data.type)||!Array.isArray(data.source_ids))return null;
+ if(data.type!=='answer')return data.source_ids.length===0?{kind:data.type,text:AI_COPY[data.type],sources:[],action:data.type==='handoff'?'真人協助':'免費資源'}:null;
+ // One complete approved answer, no model-generated prose or numerical alteration.
+ if(data.source_ids.length!==1||typeof data.source_ids[0]!=='string')return null;
+ const source=sources.find(s=>s.id===data.source_ids[0]);
+ return source?{kind:'answer',text:source.answer,sources:[{id:source.id,title:source.title,version:source.version}],action:source.action}:null;
+}
+
+const $=s=>document.querySelector(s);
+let state=initialState(),lead=null,kb=structuredClone(DEMO_KNOWLEDGE),revision=0,count=0;
+const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
+function trace(text){$('#trace').prepend(node('li',text));while($('#trace').children.length>14)$('#trace').lastChild.remove();}
+function bubble(text,cls='',sources=[]){const e=node('div',text,`bubble ${cls}`);if(sources.length)e.append(node('small',`示範知識：${sources.map(s=>s.title+' · v'+s.version).join('、')}`,'source'));$('#chat').append(e);$('#chat').scrollTop=$('#chat').scrollHeight;return e;}
+function quick(options=[]){$('#quick').replaceChildren();for(const option of [...new Set(options)]){const b=node('button',option);b.type='button';b.addEventListener('click',()=>send(option));$('#quick').append(b);}}
+function renderMessages(messages){
+ for(const m of messages){
+  if(m.type==='text'){bubble(m.text);quick(m.quickReply?.items.map(i=>i.action.text)??[]);continue;}
+  if(m.type==='flex'){
+   const cards=m.contents.type==='carousel'?m.contents.contents:[m.contents];
+   for(const card of cards){const e=bubble(card.body.contents.filter(x=>x.type==='text').map(x=>x.text).join('\n\n'));
+    for(const c of card.footer?.contents??[]){if(c.type!=='button')continue;const b=node('button',c.action.label);b.type='button';b.addEventListener('click',()=>{
+     if(c.action.type==='postback')send('同意用途並送出',new URLSearchParams(c.action.data).get('ref'));
+     else if(c.action.type==='message')send(c.action.text);
+     else bubble('此卡片為示範；正式內容連結待商家提供。','system');
+    });e.append(b);}
+   }quick();
+  }
+ }
+}
+function refresh(){
+ $('#state-label').textContent=state.draft?'填寫需求：'+state.draft.step:state.mode==='waiting'?'等待顧問接單':state.mode==='agent'?'真人接管中':'自動回覆';
+ $('#mode').textContent=state.mode==='bot'?'智慧問答 · 模擬服務':'真人交接 · AI 暫停';
+ $('#lead-label').textContent=lead?`${lead.needLabel} · ${lead.status==='assigned'?'待接單':lead.status==='accepted'?'已接單':'已聯繫'}`:'尚未建立';
+ $('#count').textContent=count;
+}
+async function send(text,submitRef=null,waitMs=350){
+ const rev=++revision;const mode=$('#scenario').value;
+ bubble(text,'user');$('#message').value='';quick();
+ const decision=route({type:submitRef?'postback':'message',text,submitRef},state,DEMO_BUSINESS,{lead});state=decision.state;
+ if(decision.newLead){lead=decision.newLead;trace('摘要確認 → 建立示範需求 → 等待顧問');}
+ if(decision.inbound){trace('真人交接中 → 訊息交由顧問處理');bubble('訊息已留在本頁示範案件，AI 暫停回答。','system');refresh();return;}
+ if(!decision.aiQuery||!state.contactAllowed){renderMessages(decision.messages);trace(state.draft?'需求狀態機 → 當前步驟':'固定路由 → 無 AI 呼叫');refresh();return;}
+ if(mode==='off'){bubble(AI_COPY.off);trace('AI off → 固定提示');quick(['留下需求','免費資源']);refresh();return;}
+ const pre=classifyQuestion(text);
+ if(pre.route!=='knowledge'){bubble(pre.text);trace('前置分流 → '+pre.reason);quick(['真人協助','留下需求']);refresh();return;}
+ const sources=retrieveKnowledge(kb,pre.query);
+ if(!sources.length){bubble(AI_COPY.no_source);trace('無有效核准來源 → 不呼叫 AI');quick(['真人協助','免費資源']);refresh();return;}
+ trace(`檢索 ${sources.length} 筆來源 → 模擬 Gateway`);count++;refresh();
+ const pending=bubble('正在查閱示範知識…','system');await new Promise(r=>setTimeout(r,waitMs));pending.remove();
+ if(rev!==revision||state.mode!=='bot'||state.draft){trace('對話已更新 → 取消舊答案');refresh();return;}
+ const raw=mode==='invalid'?{type:'answer',source_ids:['untrusted-source']}:mode==='clarify'||mode==='handoff'?{type:mode,source_ids:[]}:{type:'answer',source_ids:[sources[0].id]};
+ const result=mode==='outage'?null:validateSelection(raw,retrieveKnowledge(kb,pre.query));
+ bubble(result?.text??AI_COPY.unavailable,'',result?.sources??[]);quick([result?.action??'真人協助','留下需求']);
+ trace(mode==='outage'?'Gateway 異常 → 固定備援':!result?'拒絕無效來源 → 固定備援':`驗證 ${result.kind} → 單次回覆`);refresh();
+}
+$('#composer').addEventListener('submit',e=>{e.preventDefault();const text=$('#message').value.trim();if(text)send(text);});
+document.querySelectorAll('[data-question]').forEach(b=>b.addEventListener('click',()=>send(b.dataset.question)));
+$('#reset').addEventListener('click',()=>{revision++;state=initialState();lead=null;count=0;$('#chat').replaceChildren();$('#trace').replaceChildren();welcome();});
+$('#accept').addEventListener('click',()=>{
+ if(!lead||lead.status!=='assigned'){bubble('請先完成「留下需求」並確認送出，才有待接案件。','system');return;}
+ lead=changeLead(lead,{action:'accept',version:lead.version},{id:'advisor',role:'agent'},DEMO_BUSINESS);state.mode='agent';revision++;trace('顧問接單 → 暫停 AI 回覆');bubble('示範顧問已接單。後續文字將交給顧問；輸入「恢復機器人」可繼續閱讀公開知識。','system');quick(['恢復機器人','我的需求']);refresh();
+});
+$('#interrupt').addEventListener('click',async()=>{
+ if(state.mode!=='bot'||state.draft){bubble('請先輸入「取消」或「恢復機器人」，再測試中斷。','system');return;}
+ $('#scenario').value='normal';const task=send('第一次討論要準備什麼？',null,1200);await new Promise(r=>setTimeout(r,150));await send('真人協助');await task;
+});
+document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));document.querySelectorAll('.panel').forEach(p=>p.hidden=p.id!==b.dataset.tab);
+}));
+const nodes=[
+ ['LINE 官方帳號','Rich Menu · Flex · Quick Reply','先用案例與資源建立理解，再以「留下需求」取得明確確認。', ['核對官方帳號與 Messaging API Channel。','設定 Webhook；歡迎訊息與自動回覆避免重複。','本頁所有選單與案件均為示範。'],'public/logic.js'],
+ ['Webhook 入口','原始本文驗簽 → 去重 → 持久化','收到事件後先安全受理，耗時問答由 Durable Object alarm 處理。',['HMAC-SHA256 驗證原始 body。','核對 destination、user 來源、時間與 event ID。','重送不會重複回覆或建立需求。'],'src/index.js / src/security.js'],
+ ['對話狀態路由','停止聯繫 → 真人／表單 → FAQ → AI','需求表單和人工服務保持確定性；AI 僅處理未命中的公開問題。',['填表與等待顧問時不呼叫 AI。','提交摘要須具有效的確認參照。','價格、保證與合約問題引導顧問確認。'],'public/logic.js / public/ai-policy.js'],
+ ['核准知識檢索','有效日期 · 內容版本 · 最多 5 筆','每一則回答有可回溯的來源，不讀取案件或聯絡資料。',['發布資料須有核准人與來源。','草稿、未生效、過期來源不參與回答。','目前使用觸發詞檢索；沒有向量資料庫。'],'src/knowledge.js / public/ai-policy.js'],
+ ['AI Gateway 轉接層','consultation-ai.v1 · 供應商可替換','Gateway 負責適配模型；回傳一個來源 ID，Bot 再取出完整核准文案。',['全域每日額度、個別頻率與同時處理上限。','最多等待 8 秒，不自動重試。','只送單次問題與候選公開來源。'],'src/ai.js / src/ai-control.js'],
+ ['驗證與 LINE 回覆','Schema → 來源 → 對話版本 → Reply','即使模型輸出看似合理，也必須通過來源與狀態驗證。',['不接受自由生成文字與未知來源。','新訊息或顧問操作會取消舊答案。','Reply 失敗不改成 Push；送出結果不明不重送。'],'src/index.js / public/ai-policy.js'],
+ ['需求工作台與人工接管','負責人 · 期限 · 報價依據','顧問接單、聯繫、跟進、記錄報價與成交證據。',['SQLite Durable Object 保存各客戶案件。','16 個索引分片只保存必要清單資料。','逾時轉備援；業務依身分與案件權限操作。'],'public/admin.html / ConsultationCustomer / LeadIndex'],
+ ['維運與回復','錯誤代碼 · 來源版本 · 關閉 AI','只關閉 AI 即可回到既有 FAQ 與需求受理。',['AI_MODE=off，不刪除案件。','AI 稽核保存 7 天，不含完整問題或金鑰。','管理者可讀取 /api/admin/ai-stats。'],'docs/AI-ARCHITECTURE.md']
+];
+function showNode(i){const [title,sub,desc,items,file]=nodes[i];$('#node-detail').replaceChildren(node('div',`LAYER ${String(i+1).padStart(2,'0')}`,'eyebrow'),node('h3',title),node('p',sub),node('p',desc));const ul=node('ul');items.forEach(text=>ul.append(node('li',text)));$('#node-detail').append(ul,node('code',file));$('#nodes').querySelectorAll('button').forEach((b,n)=>{b.classList.toggle('active',n===i);b.setAttribute('aria-pressed',String(n===i));});}
+nodes.forEach((n,i)=>{const b=node('button',`${String(i+1).padStart(2,'0')}　${n[0]}`);b.append(node('small',n[1]));b.addEventListener('click',()=>showNode(i));$('#nodes').append(b);});showNode(0);
+$('#kb-editor').value=JSON.stringify(kb,null,2);
+$('#apply-kb').addEventListener('click',()=>{try{const next=JSON.parse($('#kb-editor').value),issues=knowledgeIssues(next);if(issues.length)throw new Error(issues.join('、'));kb=next;revision++;$('#kb-status').textContent='已套用到本頁；正式知識庫不受影響。';trace('知識版本切換 → 取消未完成選答');}catch(e){$('#kb-status').textContent='尚未套用：'+e.message;}});
+$('#export-kb').addEventListener('click',()=>{const draft={...kb,records:kb.records.map(r=>({...r,approved:false,status:'draft',approvedBy:'',approvedAt:''}))};const url=URL.createObjectURL(new Blob([JSON.stringify(draft,null,2)],{type:'application/json'}));const a=node('a');a.href=url;a.download='c-consultation-knowledge-draft.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+const checks=['填寫正式品牌、服務範圍與資料使用說明','審核公開知識、案例與有效期限','確認顧問負責人、備援與服務時段','選定 AI 服務，完成 Gateway 適配器','在伺服器設定 LINE 與 Gateway secrets','完成測試帳號驗收、額度與回復演練'];
+checks.forEach(text=>{const label=node('label'),input=node('input');input.type='checkbox';input.addEventListener('change',()=>$('#check-status').textContent=`建置檢視：${$('#checklist').querySelectorAll(':checked').length} / ${checks.length} 項已勾選（非實際連線驗證）。`);label.append(input,node('span',text));$('#checklist').append(label);});
+$('#contract').textContent=JSON.stringify({request:{contract:AI_CONTRACT,request_id:'HMAC識別碼',query:'第一次討論要準備什麼？',knowledge_version:'c-v1',sources:[{id:'prepare',title:'討論準備',answer:'商家核准完整文案',version:'1'}],instructions:'選答規則',response_schema:'嚴格 JSON schema'},response:{type:'answer',source_ids:['prepare']}},null,2);
+function welcome(){bubble('你好，這裡是拾策諮詢助理的互動示範。可以先問「第一次討論要準備什麼？」，也可以留下需求，了解顧問如何接手。');quick(['第一次討論要準備什麼？','留下需求','免費資源']);refresh();}welcome();
+
+})();
+</script></body></html>
