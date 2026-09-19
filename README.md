@@ -24,6 +24,9 @@
 
 ### C 型高單價／長決策 AI 諮詢模板（單一 HTML）
 
+- [2026/09/19 新版 LINE 聊天互動成品](https://keiitsu.github.io/line-example/consultation-line.html)：依 Notion 指南區分基礎／進階版本，支援聊天輸入、快速回覆、案例卡片、六格選單、表單、需求確認、案件進度與人工接手模擬。
+- 新版頁面另含可點選的建置架構、分階段工時、進階費用試算、選配模組與 CSV／規劃／獨立 HTML 下載。以 NT$1,500／人時估算，基礎版 20–32 人時；進階升級追加 42–76 人時、NT$63,000–114,000；整套 62–108 人時、NT$93,000–162,000，均未稅、平台月費另計。
+- 新版僅使用本頁記憶體模擬，不會呼叫正式 LINE、AI、CRM 或日曆；重新整理即清除。`docs/consultation-line.html` 與 `public/consultation-line.html` 同步發布。舊版導覽保留如下。
 - [直接開啟 C 型互動模板](https://keiitsu.github.io/line-example/consultation-template.html)
 - [HTML 原始檔／下載](https://github.com/keiitsu/line-example/blob/main/docs/consultation-template.html)：按 Download raw file，或在預覽頁按「下載獨立 HTML」，儲存後用 Chrome、Edge 或 Firefox 開啟。
 - 樣式、JavaScript 與示範資料已全部內嵌；可直接開啟本機 HTML，不需要 Node.js、本機伺服器、API 金鑰或網路連線。
