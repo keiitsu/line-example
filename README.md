@@ -11,12 +11,15 @@
 
 ## 線上展示
 
-### D 型實體門市會員 AI 工作台（單一 HTML）
+### D 型實體門市會員 LINE 互動成品（單一 HTML）
 
-- [直接開啟 D 型互動模板](https://keiitsu.github.io/line-example/membership-template.html)：會員問答、故障模擬、真人接管、8 層架構與內嵌 12 階段建構導覽。
+- [直接開啟 D 型互動成品](https://keiitsu.github.io/line-example/membership-template.html)：LINE 風格聊天視窗、訊息輸入、快速回覆、可收合六格圖文選單、貼圖及卡片操作。
 - [單獨開啟完整建構導覽](https://keiitsu.github.io/line-example/membership-guide.html)：品牌設定、情境演練、自評、交接紀錄匯出與建構文件。
 - 預覽頁按「下載獨立 HTML」後，用 Chrome、Edge 或 Firefox 直接開啟；樣式、程式與示範資料全部內嵌，不需要啟動伺服器。
-- 工作台下載檔也包含完整建構導覽。所有會員與 AI 回覆均為模擬，不呼叫真實服務或發送 LINE 訊息；正式 AI 供應商待決定。
+- 基礎版提供門市資訊、固定 FAQ、優惠券、集點卡與人工聯絡；進階版提供會員綁定、會員卡、個人點數／消費紀錄、會員券、AI 問答與真人接管。切換版本會重置示範狀態。
+- 「門市模擬」可操作消費發點、退款、核銷與店員接手／回覆／結案；同一收據、退款與券不可重複處理。待接手與人工服務期間，Bot 會暫停自動回答。
+- 所有會員、交易、品牌規則及 AI 回覆均為本機模擬，不呼叫真實 AI、POS 或 LINE，不會付款或發送正式訊息。正式 AI 供應商待決定。
+- 獨立 HTML 內嵌全部樣式、程式與示範資料，無外部資產。重新整理即清除狀態；下載檔從初始狀態啟動，不包含當次客服輸入。完整建構導覽保留在上方獨立連結。
 - `docs/membership-template.html`、`docs/membership-guide.html` 供 GitHub Pages 使用；`public/` 內的同名檔供應用程式靜態發布使用，更新時須同步。
 
 ### C 型高單價／長決策 AI 諮詢模板（單一 HTML）
