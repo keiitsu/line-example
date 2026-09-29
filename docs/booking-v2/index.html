@@ -68,5 +68,60 @@ function plan(){show('基礎版與進階版');const g=el('div',undefined,'plan-g
 document.querySelectorAll('[data-text]').forEach(b=>b.onclick=()=>send({text:b.dataset.text}));document.querySelector('#composer').onsubmit=e=>{e.preventDefault();const input=document.querySelector('#message');if(input.value.trim()){send({text:input.value.trim()});input.value='';}};
 document.querySelector('#person').onchange=e=>{who=e.target.value;welcome();};document.querySelector('#basic').onclick=()=>switchMode('basic');document.querySelector('#advanced').onclick=()=>switchMode('advanced');document.querySelector('#planOpen').onclick=plan;document.querySelector('#deskOpen').onclick=desk;document.querySelector('#closeModal').onclick=()=>modal.close();document.querySelector('#infoOpen').onclick=()=>{show('日和預約 · 示範商家');body.append(el('p','服務時間 10:00–18:00。服務、價格與地址均為示範；請勿填入真實個資。此頁模擬 LINE 常見聊天操作，實際 LINE 顯示依手機版本而異。'));};document.querySelector('#moreOpen').onclick=()=>{show('更多操作');button('店家模擬工作台',desk);button('建置方案與費用',plan);button('停止提醒（進階版偏好示範）',()=>{modal.close();if(mode==='advanced')send({text:'停止提醒'});else push(txt('基礎版沒有自動提醒排程。'));});button('結束人工協助',()=>{modal.close();send({text:'結束人工協助'});});button('切換示範顧客 A／B',()=>{who=who==='one'?'two':'one';document.querySelector('#person').value=who;modal.close();welcome();});};document.querySelector('#attach').onclick=()=>{show('附件');body.append(el('p','此展示只支援文字與預約卡片，不上傳照片或檔案。正式 Bot 收到圖片／貼圖時會依已設定規則處理。'));};document.querySelector('#menuToggle').onclick=e=>{const rich=document.querySelector('#rich');rich.hidden=!rich.hidden;e.target.setAttribute('aria-expanded',String(!rich.hidden));e.target.textContent='服務選單 '+(rich.hidden?'▴':'▾');};document.querySelector('#back').onclick=()=>document.querySelector('.app').classList.add('show-list');document.querySelector('#openChat').onclick=()=>document.querySelector('.app').classList.remove('show-list');welcome();
 
+// 2026-09-29: proposal and customer-service interaction enhancements.
+const buildPlan={
+ basic:[
+  ['B1 需求與所有權',4,6,'確認單店、服務價格與時長、營業公休、取消規則、個資用途及帳號權限。','交付：核准需求清單與權限名單。'],
+  ['B2 原生 OA 配置',6,8,'建立商家資訊、歡迎與固定 FAQ；區分原生自動回覆及人工客服。','驗收：加入好友、關鍵字及未知文字，不重複回覆。'],
+  ['B3 選單與需求表',8,12,'六格圖文選單連到資訊、外部需求表及客服；設申請編號與個資告知。','驗收：需求送出標示待人工確認；店員以編號核對聊天對象。'],
+  ['B4 測試與交接',6,10,'iOS／Android 逐入口測試；演練人工確認、拒絕、改期及取消。','交付：操作文件、帳號素材清冊及驗收紀錄。']
+ ],
+ advanced:[
+  ['A1 帳號與 API 基礎',12,20,'客戶 Provider／Channel → HTTPS 驗簽 → 持久收件 → 事件去重與路由；完成選單圖片及綁定。','驗收：偽造簽名拒絕；空、多筆、未知及重送事件安全處理。'],
+  ['A2 預約交易',24,36,'服務 → 日期 → 空位 → 姓名 → 確認交易；本人查詢、改期、取消、業務去重。','驗收：搶位僅一筆成功；改期失敗保留原單，取消釋出空位。'],
+  ['A3 工作台與客服接管',12,20,'基本管理登入與授權、預約列表、客服案件、接管／恢復及操作稽核。','驗收：越權被拒絕，人工接手時不重複自動回覆。'],
+  ['A4 上線驗收與維運',16,28,'follow／unfollow／再加入、unsend、隱私保存刪除、回覆錯誤、額度、備份復原與憑證輪替。','驗收：iOS／Android 真機流程、重送與失敗演練、維運交接。']
+ ],
+ options:[
+  ['預約前提醒',8,16,'需 A1＋A2；排程、停止偏好、去重與失敗紀錄。Push 用量另計。'],
+  ['Google 日曆單向同步',8,16,'需 A1＋A2 與客戶授權；建立、更新、取消、重試對帳。不含反向占位。'],
+  ['訂金與限時保留',60,96,'需 A2＋A3；單一金流、付款去重、到期釋出與退款對帳。金流費另計。'],
+  ['多員工／資源排班',32,56,'需 A2＋A3；班表、請假、指定資源及衝突檢查。限單店。'],
+  ['LIFF 預約頁',24,40,'需 A1＋A2；Login、伺服器身分驗證、表單與手機測試。核心不重收。'],
+  ['AI 知識客服',48,80,'需 A3 與核准知識；拒答、轉人工、評估及成本限制。模型用量另計。'],
+  ['多角色後台',24,40,'在 A3 基本授權上增建角色範圍及越權測試；不重收基本登入。'],
+  ['營運報表',16,24,'需 A2＋A3；預約、取消、未到、日期篩選及 CSV；先定義登錄責任。']
+ ]
+};
+const currency=n=>'NT$'+n.toLocaleString('zh-TW');
+function plan(){
+ show('建置方案與費用 · 2026-09-29 核對版');
+ body.append(el('p','基礎版由店員確認需求；進階版在交易保存成功後才成立預約。下列為沿用既有程式、單店單資源的規劃估值，未稅，非固定報價。'));
+ for(const [version,title,description] of [['basic','基礎版｜24–36 小時','OA 原生資訊與 FAQ → 外部需求表 → 人工查排程 → 人工確認。'],['advanced','進階版｜加建 64–104 小時','LINE → Webhook 驗簽／持久收件 → 去重與路由 → 預約交易資料庫 → 回覆。']]){
+  body.append(el('h3',title),el('p',description));
+  for(const [name,min,max,work,accept] of buildPlan[version]){const d=el('details',undefined,'entry');d.append(el('summary',`${name} · ${min}–${max} 小時${version==='advanced'?' · '+currency(min*1500)+'–'+currency(max*1500):''}`),el('p',work),el('p',accept,'privacy'));body.append(d);}
+ }
+ body.append(el('p','順序：B1 → B2／B3 → B4；進階先 A1，再 A2 與 A3 整合，最後 A4。單人每日投入 6 小時：基礎約 4–6 工作日，進階核心約 11–18 工作日。審核、補件與客戶回覆等待另計。'));
+ body.append(el('h3','進階選配費用試算'));
+ const baseLabel=el('label');const base=el('input');base.type='checkbox';baseLabel.append(base,document.createTextNode(' 連同基礎版建置（同時薪預算換算）'));body.append(baseLabel);
+ const inputs=[];
+ buildPlan.options.forEach(([name,min,max,note],i)=>{const box=el('section',undefined,'entry');const l=el('label');const input=el('input');input.type='checkbox';input.dataset.option=String(i);l.append(input,document.createTextNode(` ${name}｜${min}–${max} 小時｜${currency(min*1500)}–${currency(max*1500)}`));box.append(l,el('p',note,'privacy'));body.append(box);inputs.push(input);});
+ const result=el('div',undefined,'entry');result.setAttribute('role','status');result.setAttribute('aria-live','polite');body.append(result);
+ function calculate(){let low=64,high=104;const selected=[];inputs.forEach((input,i)=>{if(input.checked){const [name,min,max]=buildPlan.options[i];low+=min;high+=max;selected.push(name);}});if(base.checked){low+=24;high+=36;}result.replaceChildren(el('h3',base.checked?'基礎＋進階＋選配預算':'進階核心＋選配增量預算'),el('strong',`${low}–${high} 小時｜${currency(low*1500)}–${currency(high*1500)}（未稅）`),el('p',`按每日 6 小時：約 ${Math.ceil(low/6)}–${Math.ceil(high/6)} 工作日。\n已選：${selected.length?selected.join('、'):'只有進階核心'}。`));}
+ base.onchange=calculate;inputs.forEach(x=>x.onchange=calculate);calculate();
+ body.append(el('p','單價假設 NT$1,500／小時。選配共用工作在正式報價扣除；此處為工時相加的預算試算。LINE 方案、訊息用量、雲端、金流及模型費另計。藍盾／CP、MINI App、LAP、POINTS 另案選型。','privacy'));
+ body.append(el('h3','展示與正式交付的界線'),el('p','本頁是 LINE 風格的獨立網頁模擬，並非 LINE App。基本需求查詢、店家工作台與顧客切換是展示控制。真實 API、身分驗證、雲端保存、跨使用者併發、推播、付款及日曆同步都須正式建置及驗收；選取加購項目只改試算，不啟用功能。','privacy'));
+}
+// Expose customer context on narrow screens.
+const drawOriginal=draw;
+draw=function(){drawOriginal();document.querySelector('#subtitle').textContent=(mode==='basic'?'基礎版 · 人工接待':'進階版 · 自助預約')+' · 顧客 '+(who==='one'?'A':'B');};
+const deskOriginal=desk;
+desk=function(){deskOriginal();for(const k of handoff){const box=el('section',undefined,'entry');box.append(el('h3','客服對話：'+(k.startsWith('basic')?'基礎版':'進階版')+'／顧客 '+(k.endsWith('one')?'A':'B')));for(const item of (logs.get(k)??[]).filter(x=>x.mine).slice(-5))box.append(el('p','顧客：'+item.message.text));const form=el('form');const input=el('input');input.placeholder='輸入店員示範回覆';input.setAttribute('aria-label','店員示範回覆 '+k);input.required=true;input.maxLength=500;const submit=el('button','傳送店員回覆','primary');form.append(input,submit);form.onsubmit=e=>{e.preventDefault();if(input.value.trim()){push(txt('【店員模擬】'+input.value.trim()),false,k);input.value='';desk();}};box.append(form);body.append(box);}};
+document.querySelector('#deskOpen').onclick=desk;
+// Generic text stays in the chat without repeated bot acknowledgements during handoff.
+const sendOriginal=send;
+send=function(data,label){if(handoff.has(key())&&data.text&&!['我的預約','主選單','結束人工協助','真人協助'].includes(data.text)){push(txt(label??data.text),true);return;}sendOriginal(data,label);};
+draw();
+
 </script>
 </body></html>
