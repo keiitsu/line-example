@@ -18,12 +18,12 @@ dialog{padding:0;border:0;border-radius:17px;width:min(420px,calc(100% - 28px));
 </style>
 </head>
 <body>
-<div class="previewbar"><div class="previewbrand"><b>日日選物 · 會員服務成品</b><span class="demo-tag">互動展示</span><small>以 LINE 對話與圖文選單操作</small></div><div class="toolbar"><div class="segmented" aria-label="展示版本"><button data-mode="basic" aria-pressed="false">基礎版</button><button data-mode="advanced" aria-pressed="true">進階版</button></div><button class="tool" data-action="staff">門市模擬</button><button class="tool desktop-only" data-action="download">下載 HTML</button><button class="tool reset" data-action="reset" aria-label="重設體驗"><span>重設體驗</span><i data-icon="reset" class="mobile-back"></i></button></div></div>
+<div class="previewbar"><div class="previewbrand"><b>日日選物 · 會員服務成品</b><span class="demo-tag">互動展示</span><small>以 LINE 對話與圖文選單操作</small></div><div class="toolbar"><div class="segmented" aria-label="展示版本"><button data-mode="basic" aria-pressed="false">基礎版</button><button data-mode="advanced" aria-pressed="true">進階版</button></div><button class="tool" data-action="versions">版本說明</button><button class="tool" data-action="staff">門市模擬</button><button class="tool desktop-only" data-action="download">下載 HTML</button><button class="tool reset" data-action="reset" aria-label="重設體驗"><span>重設體驗</span><i data-icon="reset" class="mobile-back"></i></button></div></div>
 <div class="shell" id="shell">
 <aside class="rail" aria-label="應用程式導覽"><div class="app-logo">LINE</div><button class="selected" data-action="list" aria-label="聊天列表"><i data-icon="chat"></i></button><button data-action="profile" aria-label="官方帳號資訊"><i data-icon="store"></i></button><div class="spacer"></div><button data-action="help" aria-label="展示說明"><i data-icon="info"></i></button><span class="me-avatar">你</span></aside>
-<aside class="chatlist"><h2 class="list-title">聊天</h2><div class="search"><i data-icon="search"></i><input id="search" placeholder="搜尋聊天" aria-label="搜尋聊天"></div><button class="friend-row" data-action="open-chat" id="friend"><span class="brand-avatar">日</span><span class="friend-text"><strong>日日選物 <span class="friend-badge">◆</span></strong><p id="last-message">陪你，把喜歡留在日常。</p></span><time id="list-time">現在</time></button><p class="no-results" id="no-results" hidden>沒有符合的聊天</p><div class="list-note"><b>LINE 官方帳號操作展示</b><br>會員、點數、優惠與 AI 回覆皆為示範。<br>不連接真實服務，不產生交易。</div></aside>
+<aside class="chatlist"><h2 class="list-title">聊天</h2><div class="search"><i data-icon="search"></i><input id="search" placeholder="搜尋聊天" aria-label="搜尋聊天"></div><button class="friend-row" data-action="open-chat" id="friend"><span class="brand-avatar">日</span><span class="friend-text"><strong>日日選物 </strong><p id="last-message">陪你，把喜歡留在日常。</p></span><time id="list-time">現在</time></button><p class="no-results" id="no-results" hidden>沒有符合的聊天</p><div class="list-note"><b>LINE 官方帳號操作展示</b><br>會員、點數、優惠與 AI 回覆皆為示範。<br>不連接真實服務，不產生交易。</div></aside>
 <main class="chat" aria-label="日日選物 LINE 聊天">
-<header class="chat-head"><button class="icon-btn mobile-back" data-action="list" aria-label="返回聊天列表"><i data-icon="back"></i></button><span class="brand-avatar">日</span><div class="head-title"><h1>日日選物 <span class="friend-badge">◆</span></h1><small id="service-label">會員服務 · AI 小幫手</small></div><button class="icon-btn" data-action="contact" aria-label="聯絡門市"><i data-icon="phone"></i></button><button class="icon-btn" data-action="profile" aria-label="開啟官方帳號資訊"><i data-icon="more"></i></button></header>
+<header class="chat-head"><button class="icon-btn mobile-back" data-action="list" aria-label="返回聊天列表"><i data-icon="back"></i></button><span class="brand-avatar">日</span><div class="head-title"><h1>日日選物 </h1><small id="service-label">會員服務 · AI 小幫手</small></div><button class="icon-btn" data-action="contact" aria-label="聯絡門市"><i data-icon="phone"></i></button><button class="icon-btn" data-action="profile" aria-label="開啟官方帳號資訊"><i data-icon="more"></i></button></header>
 <div class="notice" id="notice"><i data-icon="info"></i><span id="notice-text">成品示範｜所有資料與 AI 回覆均為本機模擬</span><button data-action="help">說明</button></div>
 <div id="messages" class="log" role="log" aria-live="polite" aria-label="聊天紀錄"></div>
 <div class="quick" id="quick" aria-label="快速回覆"></div>
@@ -62,13 +62,14 @@ function icon(name){return '<svg viewBox="0 0 24 24" fill="none" stroke="current
 function paintIcons(root=document){root.querySelectorAll('[data-icon]').forEach(e=>e.innerHTML=icon(e.dataset.icon))}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function btn(label,action,cls=''){return '<button type="button" data-action="'+action+'"'+(cls?' class="'+cls+'"':'')+'>'+label+'</button>'}
-const initial=()=>({bound:false,points:120,stamps:2,claimed:false,used:false,code:null,codeUntil:0,sale:false,refunded:false,human:false,agentJoined:false,ai:'ok',ledger:[{name:'門市消費',date:'09/18 · NT$400',points:40},{name:'門市消費',date:'09/12 · NT$800',points:80}]});
+const initial=()=>({following:true,bound:false,points:120,stamps:2,claimed:false,used:false,code:null,codeUntil:0,sale:false,refunded:false,human:false,agentJoined:false,ai:'ok',ledger:[{name:'門市消費',date:'09/18 · NT$400',points:40},{name:'門市消費',date:'09/12 · NT$800',points:80}]});
 let mode='advanced',state=initial(),menuOpen=true,toastTimer,countdown,modalKind='',pendingBind=false,challengeUntil=0;
 const originalHtml='<!doctype html>\n'+document.documentElement.outerHTML;
 function clock(){return new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit',hour12:false})}
 function notify(text){$('#toast').textContent=text;$('#toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').hidden=true,2700)}
 function scrollEnd(){const el=$('#messages');requestAnimationFrame(()=>{el.scrollTop=el.scrollHeight})}
 function message(content,role='bot',isCard=false){
+ if(!state.following&&role!=='user')return;
  const wrap=document.createElement('div');wrap.className='message'+(role==='user'?' mine':'');
  const human=role==='agent';
  wrap.innerHTML=(role==='user'?'':'<div class="avatar'+(human?' agent':'')+'">'+(human?'店員':'日')+'</div>')+
@@ -88,10 +89,13 @@ function welcome(){
  quick(mode==='advanced'?[['我的會員卡','member'],['點數怎麼累積？','faq-points'],['找店員幫忙','human']]:[['本月優惠','coupons'],['查看集點卡','stamps'],['門市在哪裡？','store']]);
 }
 function updateHeader(){
+ $('#message-input').disabled=!state.following;$('#composer .send').disabled=!state.following;
+ $('#menu-grid').querySelectorAll('button').forEach(b=>b.disabled=!state.following);
  $('#service-label').textContent=state.human?(state.agentJoined?'店員小安服務中':'等候店員回覆'):mode==='advanced'?'會員服務 · AI 小幫手':'門市服務 · 官方帳號';
  $('#notice').classList.toggle('agent-state',state.human);
  $('#notice-text').textContent=state.human?'真人服務中，自動回覆已暫停｜示範案件 DEMO-001':'成品示範｜所有資料與 AI 回覆均為本機模擬';
- $('#message-input').placeholder=state.human?'留言給門市店員':'輸入訊息';
+ $('#message-input').placeholder=!state.following?'已封鎖示範帳號':state.human?'留言給門市店員':'輸入訊息';
+ if(!state.following){$('#service-label').textContent='已封鎖 · 可從門市模擬解除';$('#notice-text').textContent='封鎖期間停止自動回覆；既有會員及交易不會重建。'}
 }
 function renderMenu(){
  const entries=mode==='advanced'?[['card','我的會員卡','member'],['coin','我的點數','points'],['ticket','優惠券','coupons'],['history','消費紀錄','history'],['store','門市資訊','store'],['spark','AI 小幫手','ai']]:[['gift','最新優惠','coupons'],['stamp','門市集點卡','stamps'],['store','門市資訊','store'],['spark','最新消息','news'],['chat','常見問題','faq'],['phone','聯絡店員','human']];
@@ -111,7 +115,7 @@ function bind(){
  open('會員登入','<p>使用示範會員完成綁定，體驗專屬會員服務。</p><div class="demo-member"><span class="brand-avatar">林</span><div><strong>林小日</strong><small>示範會員 · DEMO-0001</small></div></div><p class="field-note">此處模擬既有會員登入，不需輸入真實帳號、電話或驗證碼。</p><label class="checkline"><input type="checkbox" id="consent">我同意在本次展示中連結這份示範會員資料。</label>'+btn('登入並返回 LINE','login','solid'),'bind');
 }
 function points(){if(mode==='basic'){stamps();return}if(!guardMember())return;card('<div class="card-body"><span class="badge">我的點數</span><h3 style="font-size:36px;margin:14px 0 5px">'+state.points+' <small style="font-size:13px;font-weight:400">點</small></h3><p>消費每滿 NT$10 累積 1 點。<br>示範效期：獲點日起 12 個月。</p>'+state.ledger.map(l=>'<div class="ledger-row"><div>'+esc(l.name)+'<small>'+esc(l.date)+'</small></div><b class="'+(l.points<0?'negative':'')+'">'+(l.points>0?'+':'')+l.points+'</b></div>').join('')+'</div>'+actions([['查看會員卡','member'],['點數使用說明','faq-points']]))}
-function history(){if(!guardMember())return;card('<div class="card-body"><h3>最近的消費紀錄</h3><p>日日選物 · 示範會員林小日</p>'+(state.sale?'<div class="ledger-row"><div>日常小物選購<small>今天 · DEMO-20260919-001</small><span class="badge">'+(state.refunded?'已退款':'已完成')+'</span></div><b>NT$300</b></div>':'')+'<div class="ledger-row"><div>生活用品<small>09/18 · DEMO-0918</small></div><b>NT$400</b></div><div class="ledger-row"><div>居家香氛<small>09/12 · DEMO-0912</small></div><b>NT$800</b></div></div>'+actions([['查看累積點數','points'],['對紀錄有疑問','human']]))}
+function history(){if(!guardMember())return;card('<div class="card-body"><h3>最近的消費紀錄</h3><p>日日選物 · 示範會員林小日</p>'+(state.sale?'<div class="ledger-row"><div>日常小物選購<small>今天 · DEMO-20260929-001</small><span class="badge">'+(state.refunded?'已退款':'已完成')+'</span></div><b>NT$300</b></div>':'')+'<div class="ledger-row"><div>生活用品<small>09/18 · DEMO-0918</small></div><b>NT$400</b></div><div class="ledger-row"><div>居家香氛<small>09/12 · DEMO-0912</small></div><b>NT$800</b></div></div>'+actions([['查看累積點數','points'],['對紀錄有疑問','human']]))}
 function coupons(){
  card('<div class="coupon-banner"><small>A LITTLE GIFT FOR YOU</small><strong><em>NT$</em> 50 <em>OFF</em></strong><p>新朋友的第一份日常心意</p></div><div class="card-body"><h3>新朋友滿額折抵券</h3><p class="coupon-meta">單筆消費滿 NT$500 折 NT$50<br>限日日選物示範門市・每人限領一次<br>效期：本次體驗期間</p><span class="badge">'+(state.used?'已使用':state.claimed?'已領取 · 可使用':'新朋友限定')+'</span></div>'+
  actions(state.used?[['查看使用紀錄','coupon-record']]:state.claimed?[['出示優惠券','show-coupon']]:[['領取這張優惠券','claim']]));
@@ -120,6 +124,7 @@ function claim(){if(state.used){message('這張券已使用過囉，敬請期待
 function showCoupon(){
  if(!state.claimed||state.used){message(state.used?'這張券已完成核銷，無法再次使用。':'請先領取優惠券。');return}
  if(mode==='advanced'&&!guardMember())return;
+ if(mode==='basic'){open('出示優惠券','<div class="code-display"><small>原生優惠券人工作業示意</small><strong>NT$50</strong><p>新朋友滿額折抵券</p></div><p>請交由店員確認領券紀錄與滿額條件，再於門市模擬登記使用。本頁示意人工流程，不產生會員 API 核銷碼。</p>','coupon');return}
  if(!state.code||Date.now()>state.codeUntil){state.code=String(Math.floor(100000+Math.random()*900000));state.codeUntil=Date.now()+90000}
  open('出示優惠券','<div class="code-display"><small>新朋友滿額折抵券 · NT$50</small><div class="barcode" aria-hidden="true"></div><strong>'+esc(state.code)+'</strong><small>示範核銷碼，不可於真實門市使用</small><p id="code-timer"></p></div><p>請在結帳時出示。店員確認消費滿額並於 POS 完成折抵後，才可登記使用。</p><div class="info-line">可點頁面上方「門市模擬」，體驗店員驗證與核銷流程。顧客端不能自行核銷。</div>','coupon');
  const tick=()=>{const left=Math.max(0,Math.ceil((state.codeUntil-Date.now())/1000));const el=$('#code-timer');if(el)el.textContent=left>0?'核銷碼有效時間 '+left+' 秒':'核銷碼已到期，請關閉後重新出示。';if(!left)clearInterval(countdown)};tick();countdown=setInterval(tick,1000);
@@ -139,12 +144,12 @@ function answerFaq(id){const q=faq.find(x=>x.id===id);if(!q)return;message(q.tex
 function faqs(){card('<div class="card-body"><h3>你想了解哪一件事？</h3><p>點選問題，我們會把資訊傳給你。</p></div>'+actions((mode==='advanced'?faq:faq.filter(x=>x.id!=='points')).map(x=>[x.label,'faq-'+x.id])))}
 function human(){if(state.human){notify('店員已在同一個對話中受理。');return}state.human=true;updateHeader();message('已收到你的聯絡需求。請直接在這裡留言，店員會於服務時間查看。\n本次為真人接管示範，沒有實際客服人員連線。');quick([['查看案件狀態','case-status']])}
 function staff(){
- open('門市模擬操作','<div class="info-line">這是展示用的店員操作台，實際顧客的 LINE 畫面不會出現。所有操作僅影響本次體驗。</div><h3>消費與退款</h3><p class="field-note">固定示範收據 DEMO-20260919-001 · NT$300<br>'+(mode==='advanced'?'須先完成會員綁定；消費 +30 點、退款扣回 30 點。':'核對滿額收據後發 1 章；退款扣回該章。')+'</p><div class="staff-grid">'+btn(state.sale?'重送同筆消費':'模擬一筆消費','staff-sale','ghost')+btn('模擬該筆退款','staff-refund','ghost')+'</div><div class="divider"></div><h3>優惠券核銷</h3><p class="field-note">請先由顧客領券並出示有效核銷碼。</p><label><input type="checkbox" id="pos-confirm">已確認滿 NT$500，並在 POS 完成 NT$50 折抵（模擬）</label>'+btn('確認核銷目前出示的券','staff-redeem','ghost')+'<div class="divider"></div><h3>真人接管</h3><p class="field-note">'+(state.human?'目前案件：DEMO-001，'+(state.agentJoined?'已接手':'等待店員接手'):'目前沒有待處理案件。先在聊天中選擇「聯絡店員」。')+'</p>'+btn('店員接手案件','staff-join','ghost')+'<label for="staff-reply">店員回覆內容</label><textarea id="staff-reply" maxlength="500" placeholder="您好，我是店員小安，請問需要什麼協助？"></textarea><div class="staff-grid">'+btn('送出人工回覆','staff-send','solid')+btn('結案並恢復自動回覆','staff-close','ghost')+'</div>'+(mode==='advanced'?'<div class="divider"></div><label for="ai-state">AI 回覆情境</label><select id="ai-state"><option value="ok">正常示範</option><option value="timeout">服務逾時</option><option value="offline">服務暫停</option></select>':'')+'<p class="field-note">重新整理或重設體驗，會清除本次所有示範狀態。</p>','staff');
+ open('門市模擬操作','<div class="info-line">這是展示用的店員操作台，實際顧客的 LINE 畫面不會出現。所有操作僅影響本次體驗。</div><h3>消費與退款</h3><p class="field-note">固定示範收據 DEMO-20260929-001 · NT$300<br>'+(mode==='advanced'?'須先完成會員綁定；消費 +30 點、退款扣回 30 點。':'核對滿額收據後發 1 章；退款扣回該章。')+'</p><div class="staff-grid">'+btn(state.sale?'重送同筆消費':'模擬一筆消費','staff-sale','ghost')+btn('模擬該筆退款','staff-refund','ghost')+'</div><div class="divider"></div><h3>優惠券核銷</h3><p class="field-note">'+(mode==='advanced'?'請先由顧客領券並出示有效核銷碼。':'請先由顧客領券，再由店員核對人工優惠紀錄。')+'</p><label><input type="checkbox" id="pos-confirm">已確認滿 NT$500，並在 POS 完成 NT$50 折抵（模擬）</label>'+btn('確認核銷目前出示的券','staff-redeem','ghost')+'<div class="divider"></div><h3>真人接管</h3><p class="field-note">'+(state.human?'目前案件：DEMO-001，'+(state.agentJoined?'已接手':'等待店員接手'):'目前沒有待處理案件。先在聊天中選擇「聯絡店員」。')+'</p>'+btn('店員接手案件','staff-join','ghost')+'<label for="staff-reply">店員回覆內容</label><textarea id="staff-reply" maxlength="500" placeholder="您好，我是店員小安，請問需要什麼協助？"></textarea><div class="staff-grid">'+btn('送出人工回覆','staff-send','solid')+btn('結案並恢復自動回覆','staff-close','ghost')+'</div>'+(mode==='advanced'?'<div class="divider"></div><label for="ai-state">AI 回覆情境</label><select id="ai-state"><option value="ok">正常示範</option><option value="timeout">服務逾時</option><option value="offline">服務暫停</option></select>':'')+'<div class="divider"></div><h3>事件演練</h3><div class="staff-grid">'+btn('模擬封鎖','staff-block','ghost')+btn('解除封鎖','staff-unblock','ghost')+(mode==='advanced'?btn('讓核銷碼到期','staff-expire','ghost'):'')+'</div><p class="field-note">重新整理或重設體驗，會清除本次所有示範狀態。</p>','staff');
  if($('#ai-state'))$('#ai-state').value=state.ai;
 }
 function settings(){if(!guardMember())return;open('會員設定','<div class="demo-member"><span class="brand-avatar">林</span><div><strong>林小日</strong><small>DEMO-0001 · 已綁定</small></div></div><p>解除綁定後，此 LINE 對話將無法查詢會員資料。示範帳本及券紀錄仍保留，再綁定同一示範會員不會重新發券。</p>'+btn('解除會員綁定','unbind','ghost'))}
 function sendText(q){
- q=q.trim();if(!q)return;message(q,'user');$('#message-input').value='';
+ q=q.trim();if(!q)return;if(!state.following){notify('此示範帳號已封鎖。');return}message(q,'user');$('#message-input').value='';
  if(state.human){notify('訊息已加入示範客服案件，自動回覆保持暫停。');return}
  if(/客服|真人|人工|店員|客訴/.test(q)){human();return}
  if(/核銷|幫我.*(扣|加|改|轉|退)|直接.*(加|改|扣)|忽略|指令|secret|token|別人|他人|其他會員/i.test(q)){message('點數、退款與核銷需要經過會員身份與門市確認，不能由聊天指令直接修改。我可以協助查詢自己的資料，或請店員接手。');quick([['我的會員卡','member'],['聯絡店員','human']]);return}
@@ -159,9 +164,10 @@ function sendText(q){
  if(/你好|嗨|哈囉|謝謝|感謝/.test(q)){message('很開心在這裡遇見你 🌿 想了解門市、優惠，還是會員服務呢？');return}
  message(mode==='advanced'?'這個問題目前沒有足夠的門市資訊可供回答。我可以幫你查詢營業時間、停車、優惠及集點規則，也可以請店員協助。':'請選擇下方常見問題，或輸入「營業時間」、「優惠」及「集點」。其他問題可以聯絡店員。');quick([['常見問題','faq'],['聯絡店員','human']]);
 }
-const customerActions=new Set(['member','points','coupons','history','store','stamps','news','faq','ai','human','claim','show-coupon','bind','confirm-bind','coupon-record']);
+const customerActions=new Set(['member','points','coupons','history','store','stamps','news','faq','ai','human','claim','show-coupon','bind','confirm-bind','coupon-record','settings','unbind','login','cancel-bind']);
 const labels={member:'我的會員卡',points:'我的點數',coupons:'優惠券',history:'消費紀錄',store:'門市資訊',stamps:'門市集點卡',news:'最新消息',faq:'常見問題',ai:'AI 小幫手',human:'聯絡店員',claim:'領取優惠券'};
 function perform(a){
+ if(!state.following&&(customerActions.has(a)||a.startsWith('faq-')||a.startsWith('sticker-'))){notify('此示範帳號已封鎖，請從門市模擬解除。');return}
  if(state.human&&(customerActions.has(a)||a.startsWith('faq-'))&&a!=='human'){
  message(labels[a]||'服務操作','user');notify('真人服務中，已將需求留給店員。');return
  }
@@ -183,22 +189,28 @@ function perform(a){
  case 'human':human();break;
  case 'case-status':message(state.human?'示範案件 DEMO-001：'+(state.agentJoined?'店員已接手。':'等待店員回覆。')+' 可繼續在這裡留言。':'目前沒有處理中的客服案件。');break;
  case 'staff':staff();break;
+ case 'staff-block':state.following=false;updateHeader();systemNote('你已封鎖此示範帳號');notify('停止回覆；會員與交易紀錄保留。');break;
+ case 'staff-unblock':if(state.following){notify('目前已加入帳號。');break}state.following=true;updateHeader();systemNote('你已解除封鎖，原會員及券紀錄保留');if(!state.human)welcome();notify('已恢復服務，不重複發券或建會員。');break;
+ case 'staff-expire':state.codeUntil=0;notify('核銷碼已到期；重新出示會取得新碼。');break;
+ case 'unsend':{close();const list=[...$('#messages').querySelectorAll('.message.mine:not([data-unsent])')];const last=list.at(-1);if(!last){notify('沒有可收回的文字或貼圖。');break}last.dataset.unsent='true';last.querySelector('.bubble').textContent='你已收回訊息';$('#last-message').textContent='你已收回訊息';notify('收回聊天內容不會撤銷已完成的交易。');break}
+ case 'versions':open('版本與操作路徑','<p><b>2026-09-29 · LINE 風格互動成品</b></p><p><b>基礎版</b><br>加入 → FAQ／六格選單 → 領券或集點 → 店員人工確認。使用上方版本切換，再直接操作聊天。</p><p><b>進階版</b><br>會員登入 → LINE 本人確認 → 點數／消費查詢 → 領券 → 短效碼 → 店員核銷；AI 無答案轉真人，等候及接手期間停止自動回覆。</p><p>「門市模擬」可測試重複交易、退款、核銷碼到期、封鎖與重新加入。「＋」可收回上一則訊息。切換版本會重置體驗。</p><p>此檔為可離線操作的展示成品，AI、身份、POS 和訊息皆以本機狀態模擬；正式服務需要後端及商家帳號串接。</p>'+btn('開始操作','close','solid'));break;
  case 'staff-sale':
  if(mode==='advanced'&&!state.bound){notify('請先在顧客對話中完成會員綁定。');break}
  if(state.sale){notify('同一收據已處理，不會重複發點。');break}
- state.sale=true;if(mode==='advanced'){state.points+=30;state.ledger.unshift({name:'門市消費',date:'今天 · DEMO-20260919-001',points:30})}else state.stamps+=1;
+ state.sale=true;if(mode==='advanced'){state.points+=30;state.ledger.unshift({name:'門市消費',date:'今天 · DEMO-20260929-001',points:30})}else state.stamps+=1;
  notify(mode==='advanced'?'消費入帳成功：+30 點。請從顧客選單查詢。':'店員已發 1 章，請重新查看集點卡。');break;
  case 'staff-refund':
  if(!state.sale){notify('尚未有可退款的示範消費。');break}if(state.refunded){notify('同一筆退款已處理，不會重複扣回。');break}
- state.refunded=true;if(mode==='advanced'){state.points-=30;state.ledger.unshift({name:'消費退款',date:'今天 · DEMO-20260919-001',points:-30})}else state.stamps-=1;notify('退款已完成，原消費點數／集章已扣回。');break;
+ state.refunded=true;if(mode==='advanced'){state.points-=30;state.ledger.unshift({name:'消費退款',date:'今天 · DEMO-20260929-001',points:-30})}else state.stamps-=1;notify('退款已完成，原消費點數／集章已扣回。');break;
  case 'staff-redeem':
  if(!state.claimed||state.used){notify(state.used?'此券已核銷，不能重複使用。':'顧客尚未領取優惠券。');break}
  if(mode==='advanced'&&!state.bound){notify('請先完成會員綁定並重新出示券。');break}
- if(!state.code||Date.now()>=state.codeUntil){notify('沒有有效核銷碼，請顧客重新出示優惠券。');break}
+ if(mode==='advanced'&&(!state.code||Date.now()>=state.codeUntil)){notify('沒有有效核銷碼，請顧客重新出示優惠券。');break}
  if(!$('#pos-confirm')?.checked){notify('請先確認滿額條件及 POS 折抵。');break}
  state.used=true;state.code=null;state.codeUntil=0;notify('核銷完成。顧客再次查看券夾會顯示已使用。');break;
  case 'staff-join':if(!state.human){notify('目前沒有待處理案件。');break}if(!state.agentJoined){state.agentJoined=true;updateHeader();message('你好，我是門市店員小安，接下來由我協助你。','agent')}notify('店員已接手；自動回覆保持暫停。');break;
  case 'staff-send':{
+ if(!state.following){notify('顧客已封鎖，無法送出人工回覆。');break}
  if(!state.human||!state.agentJoined){notify('請先接手客服案件。');break}
  const reply=$('#staff-reply').value.trim();if(!reply){notify('請輸入店員回覆內容。');break}message(reply,'agent');$('#staff-reply').value='';notify('已送出示範人工回覆。');break}
  case 'staff-close':
@@ -210,7 +222,7 @@ function perform(a){
  case 'profile':open('日日選物','<div class="demo-member"><span class="brand-avatar">日</span><div><strong>日日選物 · 日常店</strong><small>生活選物 / 每一天的小美好</small></div></div><p>把喜歡的生活物件，放進每一天。<br>每日 11:00–20:00<br>日常路 18 號 1 樓（示範資訊）</p>'+btn('查看門市資訊','profile-store','solid')+btn('聯絡店員','profile-human','ghost')+btn('下載此成品 HTML','download','ghost'));break;
  case 'profile-store':close();perform('store');break;case 'profile-human':close();perform('human');break;
  case 'contact':open('聯絡門市','<p>門市服務時間為每日 11:00–20:00。此為展示帳號，沒有提供真實電話撥號。</p>'+btn('在聊天中聯絡店員','profile-human','solid'));break;
- case 'extras':open('聊天功能','<div class="staff-grid">'+btn('我的會員卡','extra-member','ghost')+btn('貼圖','stickers','ghost')+btn('門市資訊','profile-store','ghost')+btn('聯絡店員','profile-human','ghost')+'</div>');break;
+ case 'extras':open('聊天功能','<div class="staff-grid">'+btn('我的會員卡','extra-member','ghost')+btn('貼圖','stickers','ghost')+btn('收回上一則訊息','unsend','ghost')+btn('門市資訊','profile-store','ghost')+btn('聯絡店員','profile-human','ghost')+'</div>');break;
  case 'extra-member':close();perform('member');break;
  case 'stickers':open('選擇貼圖','<div class="stickers">'+['🌿','😊','💚','🙌','☕','🎉','👍','🙏'].map((s,i)=>btn(s,'sticker-'+i)).join('')+'</div>');break;
  case 'reset':open('重新開始體驗','<p>將清除本次會員綁定、消費、優惠券和客服紀錄，回到目前版本的初始狀態。</p>'+btn('重新開始','confirm-reset','solid')+btn('繼續體驗','close','ghost'));break;
